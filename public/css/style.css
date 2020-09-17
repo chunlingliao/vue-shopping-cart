@@ -12,6 +12,13 @@ a:hover {
     width: 50%;
 }
 
+.major-color {
+    color: #ff6854;
+}
+.major-bg-color{
+    background-color: #ff6854;
+}
+
 /* header */
 .bg-light {
     background-color: #fff !important;
@@ -81,4 +88,38 @@ a:hover {
     padding: 5px 0 0;
     color: #929191;
     list-style: none;
+}
+
+/* cartPage */
+.cart-page {
+    background:#f9f9f9;
+    min-height: 80vh;
+}
+.cart-detail-list {
+    background: #fff;
+    padding: 20px;
+}
+.product-title {
+    background-color: #e0e0e0;
+}
+.product-contect {
+    background: #fff;
+}
+.list-row {
+    font-size: 14px;
+}
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.price {
+    font-size: 18px;
+    font-weight: 700;
+}
+.nt {
+    font-size: 14px;
+}
+.product-img {
+    width: 100px;
+    height: 100px;
 }
