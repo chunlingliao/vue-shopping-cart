@@ -123,3 +123,37 @@ hr {
     width: 100px;
     height: 100px;
 }
+
+/* product */
+.product {
+    min-height: 80vh;
+}
+
+.product-list {
+    background: #fff;
+    padding: 20px;
+}
+
+.product-add-img {
+    width: 455px;
+    height: 455px;
+}
+
+.addBtn{
+    width: 45%;
+    padding: 10px;
+    margin-top: 30px;
+    border: none;
+}
+.addInputGroup {
+    width:45%
+}
+
+.addProductBoder {
+    border: 1px solid #ccc;
+}
+
+.promote{
+    font-size: 16px;
+    color: #737373;
+}

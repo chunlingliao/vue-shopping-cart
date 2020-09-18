@@ -1,6 +1,13 @@
 <template>
 <div>
   <headerTop />
+  <!-- 麵包屑 -->
+  <nav class="breadcrumb-wrap" aria-label="breadcrumb">
+    <ol class="breadcrumb container">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">全系列商品</a></li>
+    </ol>
+  </nav>
   <div class="cart-page">
     <div class="container">
       <div class="row">
