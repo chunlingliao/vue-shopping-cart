@@ -56,7 +56,9 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-xs-6 p-2">
                             <div class="product">
+															<a href="../product">
                                 <img src="images/01.png" class="card-img-top" alt="...">
+															</a>
                                 <div class="card-body">
                                     <div class="caption">
                                         <h6>商品名稱</h6>
@@ -113,7 +115,44 @@ export default {
   components: {
 		headerTop,
 		footerTop
-	}
+	},
+	watch: {
+    //監聽值
+  },
+  computed: {
+    //相依的資料改變時才做計算方法
+  },
+  methods: {
+		// 初始
+  },
+  //BEGIN--生命週期
+  beforeCreate: function() {
+    //實體初始化
+  },
+  created: function() {
+    //實體建立完成。資料 $data 已可取得，但 $el 屬性還未被建立。
+    this.src = this.$options.__file ;
+  },
+  beforeMount: function() {
+    //執行元素掛載之前。
+  },
+  mounted: function() {
+    //元素已掛載， $el 被建立。
+    console.log(window.customElements)
+  },
+  beforeUpdate: function() {
+    //當資料變化時被呼叫，還不會描繪 View。
+  },
+  updated: function() {
+    //當資料變化時被呼叫，還不會描繪 View。
+  },
+  beforeDestroy: function() {
+    //實體還可使用。
+  },
+  destroyed: function() {
+    //實體銷毀。
+  }
+  //END--生命週期
 }
 </script>
 
