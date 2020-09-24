@@ -34,21 +34,25 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="shopcart-dropdown">
             <!-- 一項商品 -->
             <div class="card-list">
-              <div class="product-item">
+              <div class="product-item" v-for="item in itemList" :key="item.id">
                 <div class="thumb-img">
                   <img class="w-100" src="images/01.png" alt="">
                 </div>
                 <div class="product-name">
-                  <p class="title">MB-043 奧本口袋型電動刮鬍刀</p>
+                  <p class="title">{{ item.itemName }}</p>
                   <p class="amount">
-                    <span class="danger-color"> NT$489元 </span>
-                    <span>*1</span>
+                    <span class="danger-color"> {{ item.price }}</span>
+                    <span>*{{ item.count }}</span>
                   </p>
                 </div>
               </div>
             </div>
-            <div class="total text-right mb-2"><span>總計: </span><span class="danger-color">1188</span></div>
-            <div class="btn btn-block btn-cart">立即結帳</div>
+            <div class="total text-right mb-2"><span>總計: </span><span class="danger-color">{{ listTotalAmount }}</span></div>
+            <div class="btn btn-block btn-cart">
+              <router-link :to="{ path:'../cartPage' , query: { count: count } }">
+                  立即結帳
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -57,9 +61,96 @@
 </template>
 
 <script>
-  export default {
+export default {
+  data() {
+    return {
+      itemList:[
+        {
+          id: '1',
+          itemName: 'MB-041 奧本水洗式電動鼻毛刀',
+          price:'489',
+          count: '1',
+        },
+        {
+          id: '2',
+          itemName: 'MB-041 奧本水洗式電動鼻毛刀',
+          price:'489',
+          count: '1',
+        },
+        // {
+        //   id: '3',
+        //   itemName: 'MB-041 奧本水洗式電動鼻毛刀',
+        //   price:'489',
+        //   count: '2',
+        // }
+      ],
+      count:'0',
+      listTotalAmount:'0', // 商品小計
+      totalAmount:'0' // 應付金額
+    }
+  },
+  watch: {
+    //監聽值
 
+    // 商品明細的數量變更
+    'itemList': {
+      handler (val) {
+        this.count = this.itemList.count
+        console.log('>>',this.count)
+        this.totalprice()
+      },
+      deep: true
+    }
+
+  },
+  computed: {
+    //相依的資料改變時才做計算方法
+  },
+  methods: {
+    // 初始
+    // 商品小計 加總金額
+    totalprice() {
+      let total = 0 // 先宣告等於0
+        for (let i in this.itemList) {
+          console.log(i, this.itemList[i].price,this.itemList[i].count)
+          total += this.itemList[i].price * this.itemList[i].count
+        }
+        console.log(total)
+        this.listTotalAmount = total
+        this.totalAmount = total + this.shipping // 應付金額 = 商品小計 ＋ 運費
+      }
+
+  },
+  //BEGIN--生命週期
+  beforeCreate: function() {
+    //實體初始化
+  },
+  created: function() {
+    //實體建立完成。資料 $data 已可取得，但 $el 屬性還未被建立。
+    this.src = this.$options.__file ;
+  },
+  beforeMount: function() {
+    //執行元素掛載之前。
+  },
+  mounted: function() {
+    //元素已掛載， $el 被建立。
+    // console.log(window.customElements)
+    this.totalprice()
+  },
+  beforeUpdate: function() {
+    //當資料變化時被呼叫，還不會描繪 View。
+  },
+  updated: function() {
+    //當資料變化時被呼叫，還不會描繪 View。
+  },
+  beforeDestroy: function() {
+    //實體還可使用。
+  },
+  destroyed: function() {
+    //實體銷毀。
   }
+  //END--生命週期
+}
 </script>
 
 <style>
