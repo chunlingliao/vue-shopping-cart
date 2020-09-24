@@ -21,19 +21,19 @@
           
           <div id="homeSubmenu" class="list-row">
             <div class="float-left">商品小計</div>
-            <div class="text-right">2166</div>
+            <div class="text-right">{{ listTotalAmount }}</div>
             <hr>
           </div>
           
           <div class="list-row">
             <div class="float-left">運費</div>
-            <div class="text-right">000</div>
+            <div class="text-right">{{ shipping }}</div>
             <hr>
           </div>
           
           <div>
             <div class="float-left">應付金額</div>
-            <div class="text-right major-color"><span class="nt">NT$</span><span class="price">2166</span></div>
+            <div class="text-right major-color"><span class="nt">NT$</span><span class="price">{{ totalAmount }}</span></div>
           </div>
 
         </div>
@@ -44,9 +44,10 @@
             <thead class="product-title">
               <tr>
                 <th>商品明細</th>
-                <th class="text-center">單價</th>
-                <th class="text-center">數量</th>
-                <th width="22%" class="text-center">小計</th> 
+                <th width="30%" class="text-center"></th>
+                <th width="22%" class="text-center">單價</th>
+                <th width="30%" class="text-center">數量</th>
+                <th width="22%" class="text-center">小計</th>
                 <th></th>         
               </tr>
             </thead>
@@ -78,6 +79,7 @@
                   </div>
                 </div>
               </td>
+              <td class="text-center align-middle">{{ item.price * item.count }}</td>
               <td class="align-middle" @click="handledelete(index)"><i class="fas fa-trash-alt"></i></td>
             </tr>
           </tbody>
@@ -106,7 +108,7 @@ export default {
           id: '1',
           itemName: 'MB-041 奧本水洗式電動鼻毛刀',
           price:'489',
-          count: '3',
+          count: this.$route.query.count,
         },
         {
           id: '2',
@@ -114,36 +116,62 @@ export default {
           price:'489',
           count: '1',
         },
-        {
-          id: '3',
-          itemName: 'MB-041 奧本水洗式電動鼻毛刀',
-          price:'489',
-          count: '2',
-        }
+        // {
+        //   id: '3',
+        //   itemName: 'MB-041 奧本水洗式電動鼻毛刀',
+        //   price:'489',
+        //   count: '2',
+        // }
       ],
-      count:''
+      count: this.$route.query.count,
+      listTotalAmount:'0',
+      totalAmount:'0',
+      shipping:'0'
     }
   },
   watch: {
     //監聽值
+
+    // 商品明細的數量變更
+    'itemList': {
+      handler (val) {
+        this.totalprice()
+      },
+      deep: true
+    }
+
   },
   computed: {
     //相依的資料改變時才做計算方法
   },
   methods: {
-		// 初始
+    // 初始
+    // 點擊＋加
 		handlePlus (index) {
-    console.log(this.itemList[index].count)
-    this.itemList[index].count++;
-  },
+      console.log(this.itemList[index].count)
+      this.itemList[index].count++;
+    },
+    // 點擊-減 不少於0
 		handleSub (index) {
 			if(this.itemList[index].count >1) {
 				this.itemList[index].count--;
 			}
     },
+    // 刪除
     handledelete(index) {
       this.itemList.splice(index,1)
-    }
+    },
+
+    totalprice() {
+      let total = 0 // 先宣告等於0
+        for (let i in this.itemList) {
+          console.log(i, this.itemList[i].price,this.itemList[i].count)
+          total += this.itemList[i].price * this.itemList[i].count
+        }
+        console.log(total)
+        this.listTotalAmount = total
+      }
+
   },
   //BEGIN--生命週期
   beforeCreate: function() {
@@ -159,6 +187,7 @@ export default {
   mounted: function() {
     //元素已掛載， $el 被建立。
     console.log(window.customElements)
+    this.totalprice()
   },
   beforeUpdate: function() {
     //當資料變化時被呼叫，還不會描繪 View。
