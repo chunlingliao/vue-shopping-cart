@@ -124,9 +124,9 @@ export default {
         // }
       ],
       count: this.$route.query.count,
-      listTotalAmount:'0',
-      totalAmount:'0',
-      shipping:'0'
+      listTotalAmount:'0', // 商品小計
+      shipping: 60, // 運費
+      totalAmount:'0' // 應付金額
     }
   },
   watch: {
@@ -161,7 +161,7 @@ export default {
     handledelete(index) {
       this.itemList.splice(index,1)
     },
-
+    // 商品小計 加總金額
     totalprice() {
       let total = 0 // 先宣告等於0
         for (let i in this.itemList) {
@@ -170,6 +170,7 @@ export default {
         }
         console.log(total)
         this.listTotalAmount = total
+        this.totalAmount = total + this.shipping // 應付金額 = 商品小計 ＋ 運費
       }
 
   },
@@ -186,7 +187,7 @@ export default {
   },
   mounted: function() {
     //元素已掛載， $el 被建立。
-    console.log(window.customElements)
+    // console.log(window.customElements)
     this.totalprice()
   },
   beforeUpdate: function() {
