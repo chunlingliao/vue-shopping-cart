@@ -52,14 +52,14 @@
             </thead>
 
           <tbody class="product-contect">
-            <tr>
+            <tr v-for="(item, index) in itemList" :key="item.id">
               <td>
                 <div>
                   <img src="images/01.png" alt="" class="product-img">
                 </div>
               </td>
-              <td class="text-center align-middle"><div class="d-flex align-items-center">MB-041 奧本水洗式電動鼻毛刀</div></td>
-              <td class="text-center align-middle">489</td>
+              <td class="text-center align-middle"><div class="d-flex align-items-center">{{ item.itemName }}</div></td>
+              <td class="text-center align-middle">{{ item.price }}</td>
               <td class="text-center align-middle">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -69,7 +69,7 @@
                     </button>
                   </div>
                   <input type="text" inputmode="decimal" style="text-align: center"
-                      class="form-control" v-model="count">
+                      class="form-control" v-model="item.count">
                   <div class="input-group-append">
                     <button style="min-width: 2.5rem"
                       class="btn btn-increment btn-outline-secondary"
@@ -78,7 +78,7 @@
                   </div>
                 </div>
               </td>
-              <td class="align-middle"><i class="fas fa-trash-alt"></i></td>
+              <td class="align-middle" @click="handledelete(index)"><i class="fas fa-trash-alt"></i></td>
             </tr>
           </tbody>
         </table>
@@ -101,7 +101,27 @@ export default {
   },
   data() {
     return {
-      count: 1
+      count: 1,
+      itemList:[
+        {
+          id: '1',
+          itemName: 'MB-041 奧本水洗式電動鼻毛刀',
+          price:'489',
+          count: '3',
+        },
+        {
+          id: '2',
+          itemName: 'MB-041 奧本水洗式電動鼻毛刀',
+          price:'489',
+          count: '1',
+        },
+        {
+          id: '3',
+          itemName: 'MB-041 奧本水洗式電動鼻毛刀',
+          price:'489',
+          count: '2',
+        }
+      ]
     }
   },
   watch: {
@@ -119,7 +139,10 @@ export default {
 			if(this.count >1) {
 				this.count--;
 			}
-		}
+    },
+    handledelete(index) {
+      this.itemList.splice(index,1)
+    }
   },
   //BEGIN--生命週期
   beforeCreate: function() {
