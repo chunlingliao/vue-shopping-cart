@@ -8,6 +8,10 @@ a:hover {
     text-decoration: none;
 }
 
+p {
+    margin: 0 0 10px !important;
+}
+
 .col-xs-6 {
     width: 50%;
 }
@@ -15,14 +19,61 @@ a:hover {
 .major-color {
     color: #ff6854;
 }
-.major-bg-color{
+
+.major-bg-color {
     background-color: #ff6854;
+}
+
+.danger-color {
+    color: #f30d2a;
+}
+
+.btn-cart {
+    line-height: 30px;
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #000000;
+    background: #fff;
+    border: 1px solid #000000;
+}
+
+.btn-cart:hover {
+    color: #fff;
+    background: #ff674f;
 }
 
 /* header */
 .bg-light {
     background-color: #fff !important;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, .15);
+}
+
+/* 購物車下拉選單 */
+.dropdown-menu {
+    width: 300px !important;
+    padding: 10px 20px 20px;
+    font-size: 15px;
+}
+
+.thumb-img {
+    width: 60px;
+    position: absolute;
+}
+
+.product-item {
+    position: relative;
+    min-height: 75px;
+    border-bottom: 1px solid #DDD;
+    margin: 10px 0;
+}
+
+.product-name {
+    padding-left: 66px;
+}
+
+.title {
+    font-weight: 500;
+    color: #405161;
 }
 
 /* 麵包屑 */
@@ -61,10 +112,12 @@ a:hover {
 .category-dropdown li {
     position: relative;
 }
+
 .category-dropdown li:first-child:before {
     left: 5%;
     width: 90%;
 }
+
 .category-dropdown li:before {
     position: absolute;
     top: 0;
@@ -79,9 +132,11 @@ a:hover {
 .footer-wrap {
     background-color: #f5f5f5;
 }
+
 .footer-wrap ul {
     padding: 0;
 }
+
 .footer-wrap li {
     font-size: 13px;
     line-height: 20px;
@@ -92,33 +147,41 @@ a:hover {
 
 /* cartPage */
 .cart-page {
-    background:#f9f9f9;
+    background: #f9f9f9;
     min-height: 80vh;
 }
+
 .cart-detail-list {
     background: #fff;
     padding: 20px;
 }
+
 .product-title {
     background-color: #e0e0e0;
 }
+
 .product-contect {
     background: #fff;
 }
+
 .list-row {
     font-size: 14px;
 }
+
 hr {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 .price {
     font-size: 18px;
     font-weight: 700;
 }
+
 .nt {
     font-size: 14px;
 }
+
 .product-img {
     width: 100px;
     height: 100px;
@@ -139,21 +202,22 @@ hr {
     height: 455px;
 }
 
-.addBtn{
+.addBtn {
     width: 45%;
     padding: 10px;
     margin-top: 30px;
     border: none;
 }
+
 .addInputGroup {
-    width:45%
+    width: 45%
 }
 
 .addProductBoder {
     border: 1px solid #ccc;
 }
 
-.promote{
+.promote {
     font-size: 16px;
     color: #737373;
 }

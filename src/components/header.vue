@@ -27,7 +27,30 @@
             </div>
           </li>
         </ul>
-        <i class="fas fa-shopping-cart"></i>
+        <div class="dropdown">
+          <a href="#" id="shopcart-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fas fa-shopping-cart"></i></a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="shopcart-dropdown">
+            <!-- 一項商品 -->
+            <div class="card-list">
+              <div class="product-item">
+                <div class="thumb-img">
+                  <img class="w-100" src="images/01.png" alt="">
+                </div>
+                <div class="product-name">
+                  <p class="title">MB-043 奧本口袋型電動刮鬍刀</p>
+                  <p class="amount">
+                    <span class="danger-color"> NT$489元 </span>
+                    <span>*1</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="total text-right mb-2"><span>總計: </span><span class="danger-color">1188</span></div>
+            <div class="btn btn-block btn-cart">立即結帳</div>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
