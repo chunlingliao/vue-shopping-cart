@@ -56,7 +56,11 @@
             </div>
             <div>
               <button class="addBtn">加入購物車</button>
-              <button class="addBtn major-bg-color ml-3"><a href="../cartPage">立即購買</a></button>
+              <button class="addBtn major-bg-color ml-3">
+                <router-link :to="{ path:'../cartPage' , query: { count: count } }">
+                  立即購買
+                </router-link>
+              </button>
             </div>
           </div>
         </div>
