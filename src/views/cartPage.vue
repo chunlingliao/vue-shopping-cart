@@ -65,7 +65,7 @@
                   <div class="input-group-prepend">
                     <button style="min-width: 2.5rem"
                       class="btn btn-decrement btn-outline-secondary"
-                      type="button" @click="handleSub()"><strong>-</strong>
+                      type="button" @click="handleSub(index)"><strong>-</strong>
                     </button>
                   </div>
                   <input type="text" inputmode="decimal" style="text-align: center"
@@ -73,7 +73,7 @@
                   <div class="input-group-append">
                     <button style="min-width: 2.5rem"
                       class="btn btn-increment btn-outline-secondary"
-                      type="button" @click="handlePlus()"><strong>+</strong>
+                      type="button" @click="handlePlus(index)"><strong>+</strong>
                     </button>
                   </div>
                 </div>
@@ -101,7 +101,6 @@ export default {
   },
   data() {
     return {
-      count: 1,
       itemList:[
         {
           id: '1',
@@ -121,7 +120,8 @@ export default {
           price:'489',
           count: '2',
         }
-      ]
+      ],
+      count:''
     }
   },
   watch: {
@@ -132,12 +132,13 @@ export default {
   },
   methods: {
 		// 初始
-		handlePlus () {
-    this.count++;
+		handlePlus (index) {
+    console.log(this.itemList[index].count)
+    this.itemList[index].count++;
   },
-		handleSub () {
-			if(this.count >1) {
-				this.count--;
+		handleSub (index) {
+			if(this.itemList[index].count >1) {
+				this.itemList[index].count--;
 			}
     },
     handledelete(index) {
