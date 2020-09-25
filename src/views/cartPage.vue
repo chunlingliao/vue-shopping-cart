@@ -136,6 +136,7 @@ export default {
     'itemList': {
       handler (val) {
         this.totalprice()
+        // this.$store.dispatch("setGettt", '88888');
       },
       deep: true
     }
@@ -171,8 +172,8 @@ export default {
         console.log(total)
         this.listTotalAmount = total
         this.totalAmount = total + this.shipping // 應付金額 = 商品小計 ＋ 運費
+        this.$store.dispatch("setShoppingCartList", this.itemList)
       }
-
   },
   //BEGIN--生命週期
   beforeCreate: function() {
@@ -188,6 +189,7 @@ export default {
   mounted: function() {
     //元素已掛載， $el 被建立。
     // console.log(window.customElements)
+
     this.totalprice()
   },
   beforeUpdate: function() {

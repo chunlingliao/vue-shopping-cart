@@ -61,29 +61,11 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data() {
     return {
-      itemList:[
-        {
-          id: '1',
-          itemName: 'MB-041 奧本水洗式電動鼻毛刀',
-          price:'489',
-          count: '1',
-        },
-        {
-          id: '2',
-          itemName: 'MB-041 奧本水洗式電動鼻毛刀',
-          price:'489',
-          count: '1',
-        },
-        // {
-        //   id: '3',
-        //   itemName: 'MB-041 奧本水洗式電動鼻毛刀',
-        //   price:'489',
-        //   count: '2',
-        // }
-      ],
+      itemList:[],
       count:'0',
       listTotalAmount:'0', // 商品小計
       totalAmount:'0' // 應付金額
@@ -91,7 +73,6 @@ export default {
   },
   watch: {
     //監聽值
-
     // 商品明細的數量變更
     'itemList': {
       handler (val) {
@@ -100,11 +81,24 @@ export default {
         this.totalprice()
       },
       deep: true
+    },
+    getShoppingCartListState: {
+      handler (val) {
+        console.log('>> watch getShoppingCartListState', val)
+        this.itemList = val
+        this.totalprice()
+      },
+      deep: true
+    },
+    gettttState (val) {
+      console.log('gettttState:', val)
     }
-
   },
   computed: {
-    //相依的資料改變時才做計算方法
+    ...mapGetters({
+      getShoppingCartListState: 'getShoppingCartListState',
+      gettttState: 'gettttState'
+    })
   },
   methods: {
     // 初始
@@ -136,6 +130,8 @@ export default {
     //元素已掛載， $el 被建立。
     // console.log(window.customElements)
     this.totalprice()
+
+    console.log('gettttState:', this.gettttState)
   },
   beforeUpdate: function() {
     //當資料變化時被呼叫，還不會描繪 View。
