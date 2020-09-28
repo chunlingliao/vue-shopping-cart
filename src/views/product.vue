@@ -4,7 +4,7 @@
     <!-- 麵包屑 -->
     <nav class="breadcrumb-wrap" aria-label="breadcrumb">
       <ol class="breadcrumb container">
-          <li class="breadcrumb-item"><a href="../index">Home</a></li>
+          <li class="breadcrumb-item"><router-link :to="{ path:'../index'}">Home</router-link></li>
           <li class="breadcrumb-item"><a href="#">全系列商品</a></li>
       </ol>
     </nav>
@@ -23,7 +23,7 @@
           </div>
           <div class="col-md-6 product-list mt-4">
             <div>
-              <h3 class="title">MB-041 奧本水洗式電動鼻毛刀</h3>
+              <h3 class="title">{{ itemName }}</h3>
               <p class="promote mt-5 mb-5">
                 ▍ 全機精密防水，浴室使用也不怕水<br>
                 ▍ 依照鼻腔構造設計，立體安全圓形刀頭<br>
@@ -33,7 +33,7 @@
               </p>
             </div>
             <div>
-              NT$489
+              NT.{{ price }}
             </div>
             <hr>
             <div class="mt-3">
@@ -55,9 +55,9 @@
               </div>
             </div>
             <div>
-              <button class="addBtn">加入購物車</button>
-              <button class="addBtn major-bg-color ml-3">
-                <router-link :to="{ path:'../cartPage' , query: { count: count } }">
+              <button class="addBtn" @click="addItem()">加入購物車</button>
+              <button class="addBtn major-bg-color ml-3" @click="addItem()">
+                <router-link :to="{ path:'../cartPage' }">
                   立即購買
                 </router-link>
               </button>
@@ -71,8 +71,10 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import headerTop from '../components/header'
 import footerTop from '../components/footer'
+import cloneDeep from 'lodash/cloneDeep'
 
 export default {
   components: {
@@ -81,25 +83,59 @@ export default {
   },
   data() {
     return {
-      count: 1
+      count: this.$route.query.count,
+      itemName: this.$route.query.itemName,
+      price: this.$route.query.price
     }
   },
   watch: {
-    //監聽值
   },
   computed: {
-    //相依的資料改變時才做計算方法
+    ...mapGetters({
+      getShoppingCartListState: 'getShoppingCartListState'
+    })
   },
   methods: {
 		// 初始
 		handlePlus () {
     this.count++;
-  },
+    },
 		handleSub () {
 			if(this.count >1) {
 				this.count--;
 			}
-		}
+    },
+    // 加入購物車
+    addItem(){
+      // console.log('~~~',this.getShoppingCartListState)
+      // 需要用拷貝值才吃得到
+      let a = cloneDeep(this.getShoppingCartListState)
+
+      // 預設購物車裡面的商品參數值為false
+      let haveSameName = false
+      for (let i in this.getShoppingCartListState) {
+        // console.log('>>>>>>>>>>>', this.getShoppingCartListState[i].itemName, this.itemName)
+        // 當資料裡的名稱等於商品名稱 就相加 (相同的商品相加就對了！)
+        if (this.getShoppingCartListState[i].itemName === this.itemName) {
+          a[i] = {
+            itemName: this.getShoppingCartListState[i].itemName,
+            price: this.getShoppingCartListState[i].price,
+            count: Number(this.getShoppingCartListState[i].count) + Number(this.count)
+          }
+          haveSameName = true
+        }
+      }
+      // 第一次加進去購物車的商品 就push進去
+      if (!haveSameName) {
+          a.push({
+            itemName: this.itemName,
+            price: this.price,
+            count: this.count
+          })
+      }  
+      console.log('a>>', a, haveSameName)
+      this.$store.dispatch("setShoppingCartList", a)
+    }
   },
   //BEGIN--生命週期
   beforeCreate: function() {

@@ -1,8 +1,7 @@
 // https://vuex.vuejs.org/en/state.html
 
 export default {
-  //
-  shoppingCartList:{},
+  shoppingCartList: [],
   getttt: '1234'
   // shop:{
   //   id: {

@@ -4,7 +4,7 @@
   <!-- 麵包屑 -->
   <nav class="breadcrumb-wrap" aria-label="breadcrumb">
     <ol class="breadcrumb container">
-        <li class="breadcrumb-item"><a href="../index">Home</a></li>
+        <li class="breadcrumb-item"><router-link :to="{ path:'../index'}">Home</router-link></li>
         <li class="breadcrumb-item"><a href="#">全系列商品</a></li>
     </ol>
   </nav>
@@ -95,6 +95,7 @@
 <script>
 import headerTop from '../components/header'
 import footerTop from '../components/footer'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -103,27 +104,7 @@ export default {
   },
   data() {
     return {
-      itemList:[
-        {
-          id: '1',
-          itemName: 'MB-041 奧本水洗式電動鼻毛刀',
-          price:'489',
-          count: this.$route.query.count,
-        },
-        {
-          id: '2',
-          itemName: 'MB-041 奧本水洗式電動鼻毛刀',
-          price:'489',
-          count: '1',
-        },
-        // {
-        //   id: '3',
-        //   itemName: 'MB-041 奧本水洗式電動鼻毛刀',
-        //   price:'489',
-        //   count: '2',
-        // }
-      ],
-      count: this.$route.query.count,
+      itemList:[],
       listTotalAmount:'0', // 商品小計
       shipping: 60, // 運費
       totalAmount:'0' // 應付金額
@@ -131,19 +112,15 @@ export default {
   },
   watch: {
     //監聽值
-
-    // 商品明細的數量變更
-    'itemList': {
-      handler (val) {
-        this.totalprice()
-        // this.$store.dispatch("setGettt", '88888');
-      },
-      deep: true
+    getShoppingCartListState (val) {
+      this.itemList = val
+      this.totalprice()
     }
-
   },
   computed: {
-    //相依的資料改變時才做計算方法
+    ...mapGetters({
+      getShoppingCartListState: 'getShoppingCartListState'
+    })
   },
   methods: {
     // 初始
@@ -151,11 +128,13 @@ export default {
 		handlePlus (index) {
       console.log(this.itemList[index].count)
       this.itemList[index].count++;
+      this.totalprice()
     },
     // 點擊-減 不少於0
 		handleSub (index) {
 			if(this.itemList[index].count >1) {
-				this.itemList[index].count--;
+        this.itemList[index].count--;
+        this.totalprice()
 			}
     },
     // 刪除
@@ -172,7 +151,6 @@ export default {
         console.log(total)
         this.listTotalAmount = total
         this.totalAmount = total + this.shipping // 應付金額 = 商品小計 ＋ 運費
-        this.$store.dispatch("setShoppingCartList", this.itemList)
       }
   },
   //BEGIN--生命週期
@@ -182,6 +160,9 @@ export default {
   created: function() {
     //實體建立完成。資料 $data 已可取得，但 $el 屬性還未被建立。
     this.src = this.$options.__file ;
+    console.log('~~~~~~~', this.getShoppingCartListState)
+    // 用store的資料
+    this.itemList = this.getShoppingCartListState
   },
   beforeMount: function() {
     //執行元素掛載之前。
@@ -189,8 +170,8 @@ export default {
   mounted: function() {
     //元素已掛載， $el 被建立。
     // console.log(window.customElements)
-
-    this.totalprice()
+    // console.log('>>>', this.getShoppingCartListState)
+    // this.totalprice()
   },
   beforeUpdate: function() {
     //當資料變化時被呼叫，還不會描繪 View。

@@ -3,7 +3,7 @@
 export default {
   // 購物車資料
   saveShoppingCartList (state, payload) {
-    // console.log('mut:',payload)
+    console.log('mut:',payload)
     state.shoppingCartList = payload
   },
   // test

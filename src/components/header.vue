@@ -51,11 +51,12 @@
               </div>
             </div>
             <div class="total text-right mb-2"><span>總計: </span><span class="danger-color">{{ listTotalAmount }}</span></div>
-            <div class="btn btn-block btn-cart">
+            
               <router-link :to="{ path:'../cartPage' , query: { count: count } }">
+              <div class="btn btn-block btn-cart">
                   立即結帳
+              </div>
               </router-link>
-            </div>
           </div>
         </div>
       </div>
@@ -64,7 +65,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -78,36 +79,31 @@ export default {
   watch: {
     //監聽值
     // 商品明細的數量變更
-    'itemList': {
-      handler (val) {
-        this.count = this.itemList.count
-        console.log('>>',this.count)
-        this.totalprice()
-      },
-      deep: true
-    },
-    getShoppingCartListState: {
-      handler (val) {
-        console.log('>> watch getShoppingCartListState', val)
-        this.itemList = val
-        this.totalprice()
-      },
-      deep: true
-    },
-    gettttState (val) {
-      console.log('gettttState:', val)
+    // getShoppingCartListState: {
+    //   handler (val) {
+    //     console.log('>> watch getShoppingCartListState', val)
+    //     this.itemList = val
+    //     this.totalprice()
+    //   },
+    //   deep: true
+    // },
+    getShoppingCartListState (val) {
+      console.log('>> watch getShoppingCartListState2', val)
+      this.itemList = val
+      this.totalprice()
+      // localStorage.setItem('CartList', JSON.stringify(val))
     }
   },
   computed: {
     ...mapGetters({
-      getShoppingCartListState: 'getShoppingCartListState',
-      gettttState: 'gettttState'
+      getShoppingCartListState: 'getShoppingCartListState'
     })
   },
   methods: {
     // 初始
     // 商品小計 加總金額
     totalprice() {
+      this.itemList = this.getShoppingCartListState
       let total = 0 // 先宣告等於0
       let cartTotal = 0
         for (let i in this.itemList) {
@@ -137,8 +133,7 @@ export default {
     //元素已掛載， $el 被建立。
     // console.log(window.customElements)
     this.totalprice()
-
-    console.log('gettttState:', this.gettttState)
+    // console.log('gettttState:', this.gettttState)
   },
   beforeUpdate: function() {
     //當資料變化時被呼叫，還不會描繪 View。

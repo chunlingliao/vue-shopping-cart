@@ -4,7 +4,7 @@
         <!-- 麵包屑 -->
         <nav class="breadcrumb-wrap" aria-label="breadcrumb">
             <ol class="breadcrumb container">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><router-link :to="{ path:'../index'}">Home</router-link></li>
                 <li class="breadcrumb-item"><a href="#">全系列商品</a></li>
             </ol>
         </nav>
@@ -54,31 +54,20 @@
                 <div class="content col-md-9">
                     <h5 class="section-heading text-left">全系列商品</h5>
                     <div class="row">
-                        <div class="col-lg-3 col-md-4 col-xs-6 p-2">
+                        <div class="col-lg-3 col-md-4 col-xs-6 p-2" v-for="item in itemList" :key="item.id">
                             <div class="product">
-															<a href="../product">
-                                <img src="images/01.png" class="card-img-top" alt="...">
-															</a>
+															<router-link :to="{ path:'../product' , query: { itemName: item.itemName, price: item.price, count: item.count} }">
+																<img src="images/01.png" class="card-img-top" alt="...">
+															</router-link>
                                 <div class="card-body">
                                     <div class="caption">
-                                        <h6>商品名稱</h6>
-                                        <div class="originalPrice">NT200</div>
+                                        <h6>{{ item.itemName }}</h6>
+                                        <div class="originalPrice">NT.{{ item.price }}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 p-2">
-                            <div class="product">
-                                <img src="images/01.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <div class="caption">
-                                        <h6>商品名稱</h6>
-                                        <div class="originalPrice">NT200</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 p-2">
+                        <!-- <div class="col-lg-3 col-md-4 col-xs-6 p-2">
                             <div class="product">
                                 <img src="images/01.png" class="card-img-top" alt="...">
                                 <div class="card-body">
@@ -88,8 +77,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6 p-2">
+                        </div> -->
+                        <!-- <div class="col-lg-3 col-md-4 col-xs-6 p-2">
                             <div class="product">
                                 <img src="images/01.png" class="card-img-top" alt="...">
                                 <div class="card-body">
@@ -99,7 +88,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+                        <!-- <div class="col-lg-3 col-md-4 col-xs-6 p-2">
+                            <div class="product">
+                                <img src="images/01.png" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <div class="caption">
+                                        <h6>商品名稱</h6>
+                                        <div class="originalPrice">NT200</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -116,6 +116,37 @@ export default {
 		headerTop,
 		footerTop
 	},
+	data() {
+    return {
+			// 第一頁商品明細
+      itemList:[
+        {
+          id: '1',
+          itemName: 'MB-01 奧本水洗式電動鼻毛刀',
+          price:'489',
+          count: '1',
+        },
+        {
+          id: '2',
+          itemName: 'MB-02',
+          price:'29',
+          count: '1',
+        },
+        {
+          id: '3',
+          itemName: 'MB-03',
+          price:'55',
+          count: '1',
+				},
+				{
+          id: '4',
+          itemName: 'MB-04',
+          price:'99',
+          count: '1',
+        }
+			]
+    }
+  },
 	watch: {
     //監聽值
   },
@@ -138,7 +169,7 @@ export default {
   },
   mounted: function() {
     //元素已掛載， $el 被建立。
-    console.log(window.customElements)
+    // console.log(window.customElements)
   },
   beforeUpdate: function() {
     //當資料變化時被呼叫，還不會描繪 View。
