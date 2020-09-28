@@ -30,7 +30,10 @@
         <div class="dropdown">
           <a href="#" id="shopcart-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            <i class="fas fa-shopping-cart"></i></a>
+            <i class="fas fa-shopping-cart"></i>
+            <!-- 購物車計數 -->
+            <span class="cart-count">1</span>
+          </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="shopcart-dropdown">
             <!-- 一項商品 -->
             <div class="card-list" v-for="item in itemList" :key="item.id">

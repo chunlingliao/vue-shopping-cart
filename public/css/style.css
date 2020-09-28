@@ -48,6 +48,20 @@ p {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, .15);
 }
 
+.cart-count {
+    line-height: 20px;
+    background: #ff674f;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    color: #FFF;
+    border-radius: 50%;
+    float: right;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
 /* 購物車下拉選單 */
 .dropdown-menu {
     width: 300px !important;
