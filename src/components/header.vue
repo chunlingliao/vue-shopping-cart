@@ -32,7 +32,7 @@
             aria-expanded="false">
             <i class="fas fa-shopping-cart"></i>
             <!-- 購物車計數 -->
-            <span class="cart-count">1</span>
+            <span class="cart-count">{{ cartCount }}</span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="shopcart-dropdown">
             <!-- 一項商品 -->
@@ -71,7 +71,8 @@ export default {
       itemList:[],
       count:'0',
       listTotalAmount:'0', // 商品小計
-      totalAmount:'0' // 應付金額
+      totalAmount:'0', // 應付金額
+      cartCount:'0' // 購物車商品數量
     }
   },
   watch: {
@@ -108,13 +109,16 @@ export default {
     // 商品小計 加總金額
     totalprice() {
       let total = 0 // 先宣告等於0
+      let cartTotal = 0
         for (let i in this.itemList) {
           console.log(i, this.itemList[i].price,this.itemList[i].count)
           total += this.itemList[i].price * this.itemList[i].count
+          cartTotal += parseInt(this.itemList[i].count)
         }
-        console.log(total)
+        console.log(cartTotal)
         this.listTotalAmount = total
         this.totalAmount = total + this.shipping // 應付金額 = 商品小計 ＋ 運費
+        this.cartCount = cartTotal // 購物車商品數量
       }
 
   },
