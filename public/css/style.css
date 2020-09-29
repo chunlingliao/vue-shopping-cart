@@ -55,7 +55,8 @@ p {
     height: 20px;
     text-align: center;
     color: #FFF;
-    border-radius: 50%;
+    /* border-radius: 50%; 就會變圓形 */
+    border-radius: 50%; 
     float: right;
     font-size: 12px;
     font-weight: 600;

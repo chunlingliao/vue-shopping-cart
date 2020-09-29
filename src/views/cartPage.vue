@@ -113,6 +113,7 @@ export default {
   watch: {
     //監聽值
     getShoppingCartListState (val) {
+      console.log('watch',val)
       this.itemList = val
       this.totalprice()
     }
@@ -144,13 +145,17 @@ export default {
     // 商品小計 加總金額
     totalprice() {
       let total = 0 // 先宣告等於0
+      let cartTotal = 0
         for (let i in this.itemList) {
           console.log(i, this.itemList[i].price,this.itemList[i].count)
           total += this.itemList[i].price * this.itemList[i].count
+          cartTotal += parseInt(this.itemList[i].count)
         }
         console.log(total)
         this.listTotalAmount = total
         this.totalAmount = total + this.shipping // 應付金額 = 商品小計 ＋ 運費
+        this.cartCount = cartTotal // 購物車商品數量
+        console.log('≈≈≈',this.cartCount)
       }
   },
   //BEGIN--生命週期
@@ -171,7 +176,7 @@ export default {
     //元素已掛載， $el 被建立。
     // console.log(window.customElements)
     // console.log('>>>', this.getShoppingCartListState)
-    // this.totalprice()
+    this.totalprice()
   },
   beforeUpdate: function() {
     //當資料變化時被呼叫，還不會描繪 View。

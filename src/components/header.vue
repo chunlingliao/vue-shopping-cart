@@ -79,19 +79,13 @@ export default {
   watch: {
     //監聽值
     // 商品明細的數量變更
-    // getShoppingCartListState: {
-    //   handler (val) {
-    //     console.log('>> watch getShoppingCartListState', val)
-    //     this.itemList = val
-    //     this.totalprice()
-    //   },
-    //   deep: true
-    // },
-    getShoppingCartListState (val) {
-      console.log('>> watch getShoppingCartListState2', val)
-      this.itemList = val
-      this.totalprice()
-      // localStorage.setItem('CartList', JSON.stringify(val))
+    getShoppingCartListState: {
+      handler (val) {
+        console.log('>> watch', val)
+        this.itemList = val
+        this.totalprice()
+      },
+      deep: true
     }
   },
   computed: {
@@ -111,12 +105,12 @@ export default {
           total += this.itemList[i].price * this.itemList[i].count
           cartTotal += parseInt(this.itemList[i].count)
         }
-        console.log(cartTotal)
+        console.log(',,,',cartTotal)
         this.listTotalAmount = total
         this.totalAmount = total + this.shipping // 應付金額 = 商品小計 ＋ 運費
         this.cartCount = cartTotal // 購物車商品數量
+        console.log('>>>>>>>>>>>>>>>',this.cartCount)
       }
-
   },
   //BEGIN--生命週期
   beforeCreate: function() {
