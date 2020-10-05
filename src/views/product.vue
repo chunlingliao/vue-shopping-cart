@@ -111,10 +111,9 @@ export default {
       // 需要用拷貝值才吃得到
       let a = cloneDeep(this.getShoppingCartListState)
 
-      // 預設購物車裡面的商品參數值為false
+      // 檢查購物車裡的商品 若有被選購過 只添加數量 預設購物車裡面的商品參數值為false
       let haveSameName = false
       for (let i in this.getShoppingCartListState) {
-        // console.log('>>>>>>>>>>>', this.getShoppingCartListState[i].itemName, this.itemName)
         // 當資料裡的名稱等於商品名稱 就相加 (相同的商品相加就對了！)
         if (this.getShoppingCartListState[i].itemName === this.itemName) {
           a[i] = {
@@ -124,6 +123,7 @@ export default {
           }
           haveSameName = true
         }
+        // localStorage.setItem('CartList',JSON.stringify(this.getShoppingCartListState))
       }
       // 第一次加進去購物車的商品 就push進去
       if (!haveSameName) {
@@ -132,9 +132,11 @@ export default {
             price: this.price,
             count: this.count
           })
-      }  
+      }
+      
       console.log('a>>', a, haveSameName)
       this.$store.dispatch("setShoppingCartList", a)
+      
     }
   },
   //BEGIN--生命週期

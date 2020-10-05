@@ -5,6 +5,7 @@ export default {
   saveShoppingCartList (state, payload) {
     console.log('mut:',payload)
     state.shoppingCartList = payload
+    localStorage.setItem('CartList',JSON.stringify(state.shoppingCartList))
   },
   // test
   saveGettt (state, payload) {
