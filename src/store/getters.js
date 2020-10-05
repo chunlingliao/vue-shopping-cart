@@ -5,8 +5,8 @@ export default {
     return state.shoppingCartList
   },
   // test
-  gettttState: state => {
-    console.log('>',state.shoppingCartList)
-    return state.getttt
-  }
+  // gettttState: state => {
+  //   console.log('>',state.shoppingCartList)
+  //   return state.getttt
+  // }
 }

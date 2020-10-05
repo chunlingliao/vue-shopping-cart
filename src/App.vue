@@ -42,12 +42,14 @@ export default {
   mounted: function() {
     //元素已掛載， $el 被建立。
     // console.log(window.customElements)
-
+    console.log('localStorage:',localStorage.getItem('CartList'))
     // 畫面一開始載進來的時候 在把存在localStorage的值拿出來用
-    let List = JSON.parse(localStorage.getItem('CartList'))
-    console.log('List',List)
-    // 把值塞到store裡
-    this.$store.dispatch("setShoppingCartList", List)
+    if(localStorage.getItem('CartList')!== null){
+      let List = JSON.parse(localStorage.getItem('CartList'))
+      console.log('List',List)
+      // 把值塞到store裡
+      this.$store.dispatch("setShoppingCartList", List)
+    }
   },
   beforeUpdate: function() {
     //當資料變化時被呼叫，還不會描繪 View。
