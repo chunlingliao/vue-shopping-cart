@@ -35,7 +35,7 @@
               </p>
             </div>
             <span class="mr-1">幣別:</span>
-            <select v-model="selectChangeItems.selected">
+            <select v-model="selectChangeItems.selected" class="form-control filterSelect d-inline-block mr-1" style="width:150px">
               <option v-for="option in selectChangeItems.options">
                 {{ option.text }}
               </option>
