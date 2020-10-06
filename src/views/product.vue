@@ -32,8 +32,14 @@
                 ▍ 日本Mabuchi馬達，馬力效能一流<br>
               </p>
             </div>
+            幣別:
+            <select v-model="selectChangeItems.selected" >
+              <option v-for="option in selectChangeItems.options">
+                {{ option.text }}
+              </option>
+            </select>
             <div>
-              NT.{{ price }}
+              NT.{{ priceres }}
             </div>
             <hr>
             <div class="mt-3">
@@ -85,10 +91,23 @@ export default {
     return {
       count: this.$route.query.count,
       itemName: this.$route.query.itemName,
-      price: this.$route.query.price
+      price: this.$route.query.price,
+      priceres: this.$route.query.price,
+      selectChangeItems: {
+        selected: '台幣',
+        options: [
+          { text: '台幣', value: 1 },
+          { text: '美金', value: 2 },
+          { text: '日幣', value: 3 }
+        ]
+      }
     }
   },
   watch: {
+    'selectChangeItems.selected'(val){
+      console.log('val',val)
+      this.moneyMath()
+    }
   },
   computed: {
     ...mapGetters({
@@ -105,8 +124,27 @@ export default {
 				this.count--;
 			}
     },
+    // 幣別切換
+    moneyMath() {
+      console.log(this.selectChangeItems)
+      for (let i in this.selectChangeItems.options){
+        if(this.selectChangeItems.options[i].text !== this.selectChangeItems.selected ) continue ;
+        if(this.selectChangeItems.options[i].value === 2){
+          // console.log('幣別：',this.selectChangeItems.options[i].value)
+          this.priceres = Math.round(this.price/29)
+          console.log('res 1:',this.priceres)
+        }else if(this.selectChangeItems.options[i].value === 3){
+          this.priceres = Math.round(this.price*27)
+          console.log('res 2:',this.priceres)
+        }else if(this.selectChangeItems.options[i].value === 1) {
+          this.priceres = this.$route.query.price
+          console.log('res 3:',this.priceres)
+        }
+      }
+    },
+
     // 加入購物車
-    addItem(){
+    addItem() {
       // console.log('~~~',this.getShoppingCartListState)
       // 需要用拷貝值才吃得到
       let a = cloneDeep(this.getShoppingCartListState)
