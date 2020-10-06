@@ -4,8 +4,10 @@
     <!-- 麵包屑 -->
     <nav class="breadcrumb-wrap" aria-label="breadcrumb">
       <ol class="breadcrumb container">
-          <li class="breadcrumb-item"><router-link :to="{ path:'../index'}">Home</router-link></li>
-          <li class="breadcrumb-item"><a href="#">全系列商品</a></li>
+        <li class="breadcrumb-item">
+          <router-link :to="{ path:'../index'}">Home</router-link>
+        </li>
+        <li class="breadcrumb-item"><a href="#">全系列商品</a></li>
       </ol>
     </nav>
     <div class="product">
@@ -33,29 +35,31 @@
               </p>
             </div>
             幣別:
-            <select v-model="selectChangeItems.selected" >
+            <select v-model="selectChangeItems.selected" class="form-control filterSelect d-inline-block" style="width:150px">
               <option v-for="option in selectChangeItems.options">
                 {{ option.text }}
               </option>
             </select>
+            <!-- daisy -->
+            <select v-model="selected" class="form-control filterSelect d-inline-block" style="width:150px">
+              <option value="" disabled>--請選擇幣別--</option>
+              <option :value="item" v-for="(item,i) in selectData" :key="i">{{ item.text }}</option>
+            </select>
             <div>
-              NT.{{ priceres }}
+              {{moneyType}} {{ priceres }}
             </div>
             <hr>
             <div class="mt-3">
               <div class="input-group addInputGroup">
                 <div class="input-group-prepend">
-                  <button style="min-width: 2.5rem"
-                    class="btn btn-decrement btn-outline-secondary"
-                    type="button" @click="handleSub()"><strong>-</strong>
+                  <button style="min-width: 2.5rem" class="btn btn-decrement btn-outline-secondary" type="button"
+                    @click="handleSub()"><strong>-</strong>
                   </button>
                 </div>
-                <input type="text" inputmode="decimal" style="text-align: center"
-                    class="form-control" v-model="count">
+                <input type="text" inputmode="decimal" style="text-align: center" class="form-control" v-model="count">
                 <div class="input-group-append">
-                  <button style="min-width: 2.5rem"
-                    class="btn btn-increment btn-outline-secondary"
-                    type="button" @click="handlePlus()"><strong>+</strong>
+                  <button style="min-width: 2.5rem" class="btn btn-increment btn-outline-secondary" type="button"
+                    @click="handlePlus()"><strong>+</strong>
                   </button>
                 </div>
               </div>
@@ -77,135 +81,191 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import headerTop from '../components/header'
-import footerTop from '../components/footer'
-import cloneDeep from 'lodash/cloneDeep'
+  import {
+    mapGetters,
+    mapActions
+  } from 'vuex'
+  import headerTop from '../components/header'
+  import footerTop from '../components/footer'
+  import cloneDeep from 'lodash/cloneDeep'
 
-export default {
-  components: {
-    headerTop,
-    footerTop
-  },
-  data() {
-    return {
-      count: this.$route.query.count,
-      itemName: this.$route.query.itemName,
-      price: this.$route.query.price,
-      priceres: this.$route.query.price,
-      selectChangeItems: {
-        selected: '台幣',
-        options: [
-          { text: '台幣', value: 1 },
-          { text: '美金', value: 2 },
-          { text: '日幣', value: 3 }
-        ]
-      }
-    }
-  },
-  watch: {
-    'selectChangeItems.selected'(val){
-      console.log('val',val)
-      this.moneyMath()
-    }
-  },
-  computed: {
-    ...mapGetters({
-      getShoppingCartListState: 'getShoppingCartListState'
-    })
-  },
-  methods: {
-		// 初始
-		handlePlus () {
-    this.count++;
+  export default {
+    components: {
+      headerTop,
+      footerTop
     },
-		handleSub () {
-			if(this.count >1) {
-				this.count--;
-			}
-    },
-    // 幣別切換
-    moneyMath() {
-      console.log(this.selectChangeItems)
-      for (let i in this.selectChangeItems.options){
-        if(this.selectChangeItems.options[i].text !== this.selectChangeItems.selected ) continue ;
-        if(this.selectChangeItems.options[i].value === 2){
-          // console.log('幣別：',this.selectChangeItems.options[i].value)
-          this.priceres = Math.round(this.price/29)
-          console.log('res 1:',this.priceres)
-        }else if(this.selectChangeItems.options[i].value === 3){
-          this.priceres = Math.round(this.price*27)
-          console.log('res 2:',this.priceres)
-        }else if(this.selectChangeItems.options[i].value === 1) {
-          this.priceres = this.$route.query.price
-          console.log('res 3:',this.priceres)
-        }
-      }
-    },
-
-    // 加入購物車
-    addItem() {
-      // console.log('~~~',this.getShoppingCartListState)
-      // 需要用拷貝值才吃得到
-      let a = cloneDeep(this.getShoppingCartListState)
-
-      // 檢查購物車裡的商品 若有被選購過 只添加數量 預設購物車裡面的商品參數值為false
-      let haveSameName = false
-      for (let i in this.getShoppingCartListState) {
-        // 當資料裡的名稱等於商品名稱 就相加 (相同的商品相加就對了！)
-        if (this.getShoppingCartListState[i].itemName === this.itemName) {
-          a[i] = {
-            itemName: this.getShoppingCartListState[i].itemName,
-            price: this.getShoppingCartListState[i].price,
-            count: Number(this.getShoppingCartListState[i].count) + Number(this.count)
+    data() {
+      return {
+        count: this.$route.query.count,
+        itemName: this.$route.query.itemName,
+        price: this.$route.query.price,
+        priceres: this.$route.query.price,
+        //daisy
+        selected: "",
+        selectData: [{
+            text: "台幣",
+            value: "TWD"
+          },
+          {
+            text: "美金",
+            value: "USD"
+          },
+          {
+            text: "日圓",
+            value: "JPY"
           }
-          haveSameName = true
-        }
-        // localStorage.setItem('CartList',JSON.stringify(this.getShoppingCartListState))
+        ],
+        selectChangeItems: {
+          selected: '台幣',
+          options: [{
+              text: '台幣',
+              value: 1
+            },
+            {
+              text: '美金',
+              value: 2
+            },
+            {
+              text: '日幣',
+              value: 3
+            }
+          ]
+        },
+        moneyType : "TWD"
       }
-      // 第一次加進去購物車的商品 就push進去
-      if (!haveSameName) {
+    },
+    watch: {
+      'selectChangeItems.selected'(val) {
+        console.log('val', val)
+        this.moneyMath()
+      },
+      //daisy
+      'selected'(val) {
+        console.log("val", val.value)
+        this.moneyMath2()
+      }
+    },
+    computed: {
+      ...mapGetters({
+        getShoppingCartListState: 'getShoppingCartListState'
+      })
+    },
+    methods: {
+      // 初始
+      handlePlus() {
+        this.count++;
+      },
+      handleSub() {
+        if (this.count > 1) {
+          this.count--;
+        }
+      },
+      // 幣別切換
+      moneyMath() {
+        console.log(this.selectChangeItems)
+        for (let i in this.selectChangeItems.options) {
+          if (this.selectChangeItems.options[i].text !== this.selectChangeItems.selected) continue;
+          if (this.selectChangeItems.options[i].value === 2) {
+            // console.log('幣別：',this.selectChangeItems.options[i].value)
+            this.priceres = Math.round(this.price / 29)
+            console.log('res 1:', this.priceres)
+          } else if (this.selectChangeItems.options[i].value === 3) {
+            this.priceres = Math.round(this.price * 27)
+            console.log('res 2:', this.priceres)
+          } else if (this.selectChangeItems.options[i].value === 1) {
+            this.priceres = this.$route.query.price
+            console.log('res 3:', this.priceres)
+          }
+        }
+      },
+      //daisy
+      moneyMath2() {
+        for (let i in this.selectData) {
+          if (this.selectData[i].text !== this.selected.text) continue
+          let currency = this.selectData[i].value //幣別 
+          switch (currency) {
+            case 'TWD':
+              this.priceres = this.$route.query.price
+              this.moneyType = currency
+              break
+            case 'USD':
+              this.priceres = Math.round(this.price / 29)
+              this.moneyType = currency
+              break
+            case 'JPY':
+              this.priceres = Math.round(this.price * 27)
+              this.moneyType = currency
+              break
+            default:
+              break;
+          }
+        }
+
+      },
+
+      // 加入購物車
+      addItem() {
+        // console.log('~~~',this.getShoppingCartListState)
+        // 需要用拷貝值才吃得到
+        let a = cloneDeep(this.getShoppingCartListState)
+
+        // 檢查購物車裡的商品 若有被選購過 只添加數量 預設購物車裡面的商品參數值為false
+        let haveSameName = false
+        for (let i in this.getShoppingCartListState) {
+          // 當資料裡的名稱等於商品名稱 就相加 (相同的商品相加就對了！)
+          if (this.getShoppingCartListState[i].itemName === this.itemName) {
+            a[i] = {
+              itemName: this.getShoppingCartListState[i].itemName,
+              price: this.getShoppingCartListState[i].price,
+              count: Number(this.getShoppingCartListState[i].count) + Number(this.count)
+            }
+            haveSameName = true
+          }
+          // localStorage.setItem('CartList',JSON.stringify(this.getShoppingCartListState))
+        }
+        // 第一次加進去購物車的商品 就push進去
+        if (!haveSameName) {
           a.push({
             itemName: this.itemName,
             price: this.price,
             count: this.count
           })
+        }
+
+        console.log('a>>', a, haveSameName)
+        this.$store.dispatch("setShoppingCartList", a)
+
       }
-      
-      console.log('a>>', a, haveSameName)
-      this.$store.dispatch("setShoppingCartList", a)
-      
+    },
+    //BEGIN--生命週期
+    beforeCreate: function () {
+      //實體初始化
+    },
+    created: function () {
+      //實體建立完成。資料 $data 已可取得，但 $el 屬性還未被建立。
+      this.src = this.$options.__file;
+    },
+    beforeMount: function () {
+      //執行元素掛載之前。
+    },
+    mounted: function () {
+      //元素已掛載， $el 被建立。
+      console.log(window.customElements)
+    },
+    beforeUpdate: function () {
+      //當資料變化時被呼叫，還不會描繪 View。
+    },
+    updated: function () {
+      //當資料變化時被呼叫，還不會描繪 View。
+    },
+    beforeDestroy: function () {
+      //實體還可使用。
+    },
+    destroyed: function () {
+      //實體銷毀。
     }
-  },
-  //BEGIN--生命週期
-  beforeCreate: function() {
-    //實體初始化
-  },
-  created: function() {
-    //實體建立完成。資料 $data 已可取得，但 $el 屬性還未被建立。
-    this.src = this.$options.__file ;
-  },
-  beforeMount: function() {
-    //執行元素掛載之前。
-  },
-  mounted: function() {
-    //元素已掛載， $el 被建立。
-    console.log(window.customElements)
-  },
-  beforeUpdate: function() {
-    //當資料變化時被呼叫，還不會描繪 View。
-  },
-  updated: function() {
-    //當資料變化時被呼叫，還不會描繪 View。
-  },
-  beforeDestroy: function() {
-    //實體還可使用。
-  },
-  destroyed: function() {
-    //實體銷毀。
+    //END--生命週期
   }
-  //END--生命週期
-}
 </script>
 
 <style>
