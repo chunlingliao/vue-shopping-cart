@@ -34,8 +34,8 @@
                 ▍ 日本Mabuchi馬達，馬力效能一流<br>
               </p>
             </div>
-            幣別:
-            <select v-model="selectChangeItems.selected" class="form-control filterSelect d-inline-block" style="width:150px">
+            <span class="mr-1">幣別:</span>
+            <select v-model="selectChangeItems.selected">
               <option v-for="option in selectChangeItems.options">
                 {{ option.text }}
               </option>
@@ -46,7 +46,7 @@
               <option :value="item" v-for="(item,i) in selectData" :key="i">{{ item.text }}</option>
             </select>
             <div>
-              {{moneyType}} {{ priceres }}
+              {{ moneyType }}.{{ priceres }}
             </div>
             <hr>
             <div class="mt-3">
@@ -100,6 +100,24 @@
         itemName: this.$route.query.itemName,
         price: this.$route.query.price,
         priceres: this.$route.query.price,
+        selectChangeItems: {
+          selected: '台幣',
+          options: [{
+              text: '台幣',
+              value: 'TWD'
+            },
+            {
+              text: '美金',
+              value: 'USD'
+            },
+            {
+              text: '日幣',
+              value: 'JPY'
+            }
+          ]
+        },
+        // 預設幣別為台幣
+        moneyType: 'TWD',
         //daisy
         selected: "",
         selectData: [{
@@ -115,23 +133,6 @@
             value: "JPY"
           }
         ],
-        selectChangeItems: {
-          selected: '台幣',
-          options: [{
-              text: '台幣',
-              value: 1
-            },
-            {
-              text: '美金',
-              value: 2
-            },
-            {
-              text: '日幣',
-              value: 3
-            }
-          ]
-        },
-        moneyType : "TWD"
       }
     },
     watch: {
@@ -143,13 +144,14 @@
       'selected'(val) {
         console.log("val", val.value)
         this.moneyMath2()
-      }
+      },
     },
     computed: {
       ...mapGetters({
         getShoppingCartListState: 'getShoppingCartListState'
       })
     },
+   
     methods: {
       // 初始
       handlePlus() {
@@ -164,21 +166,24 @@
       moneyMath() {
         console.log(this.selectChangeItems)
         for (let i in this.selectChangeItems.options) {
+          // 判斷選擇的幣別
           if (this.selectChangeItems.options[i].text !== this.selectChangeItems.selected) continue;
-          if (this.selectChangeItems.options[i].value === 2) {
+          if (this.selectChangeItems.options[i].value === 'USD') {
             // console.log('幣別：',this.selectChangeItems.options[i].value)
             this.priceres = Math.round(this.price / 29)
+            this.moneyType = 'USD'
             console.log('res 1:', this.priceres)
-          } else if (this.selectChangeItems.options[i].value === 3) {
+          } else if (this.selectChangeItems.options[i].value === 'JPY') {
             this.priceres = Math.round(this.price * 27)
+            this.moneyType = 'JPY'
             console.log('res 2:', this.priceres)
-          } else if (this.selectChangeItems.options[i].value === 1) {
+          } else if (this.selectChangeItems.options[i].value === 'TWD') {
             this.priceres = this.$route.query.price
+            this.moneyType = 'TWD'
             console.log('res 3:', this.priceres)
           }
         }
       },
-      //daisy
       moneyMath2() {
         for (let i in this.selectData) {
           if (this.selectData[i].text !== this.selected.text) continue
@@ -200,9 +205,7 @@
               break;
           }
         }
-
       },
-
       // 加入購物車
       addItem() {
         // console.log('~~~',this.getShoppingCartListState)
