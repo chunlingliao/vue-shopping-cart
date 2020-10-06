@@ -32,14 +32,14 @@
                 ▍ 日本Mabuchi馬達，馬力效能一流<br>
               </p>
             </div>
-            幣別:
+            <span class="mr-1">幣別:</span>
             <select v-model="selectChangeItems.selected" >
-              <option v-for="option in selectChangeItems.options">
+              <option v-for="option in selectChangeItems.options" >
                 {{ option.text }}
               </option>
             </select>
             <div>
-              NT.{{ priceres }}
+              {{ moneyType }}.{{ priceres }}
             </div>
             <hr>
             <div class="mt-3">
@@ -96,11 +96,13 @@ export default {
       selectChangeItems: {
         selected: '台幣',
         options: [
-          { text: '台幣', value: 1 },
-          { text: '美金', value: 2 },
-          { text: '日幣', value: 3 }
+          { text: '台幣', value: 'TWD'},
+          { text: '美金', value: 'USD' },
+          { text: '日幣', value: 'JPY' }
         ]
-      }
+      },
+      // 預設幣別為台幣
+      moneyType:'TWD'
     }
   },
   watch: {
@@ -128,16 +130,20 @@ export default {
     moneyMath() {
       console.log(this.selectChangeItems)
       for (let i in this.selectChangeItems.options){
+        // 判斷選擇的幣別
         if(this.selectChangeItems.options[i].text !== this.selectChangeItems.selected ) continue ;
-        if(this.selectChangeItems.options[i].value === 2){
+        if(this.selectChangeItems.options[i].value === 'USD'){
           // console.log('幣別：',this.selectChangeItems.options[i].value)
           this.priceres = Math.round(this.price/29)
+          this.moneyType = 'USD'
           console.log('res 1:',this.priceres)
-        }else if(this.selectChangeItems.options[i].value === 3){
+        }else if(this.selectChangeItems.options[i].value === 'JPY'){
           this.priceres = Math.round(this.price*27)
+          this.moneyType = 'JPY'
           console.log('res 2:',this.priceres)
-        }else if(this.selectChangeItems.options[i].value === 1) {
+        }else if(this.selectChangeItems.options[i].value === 'TWD') {
           this.priceres = this.$route.query.price
+          this.moneyType = 'TWD'
           console.log('res 3:',this.priceres)
         }
       }
