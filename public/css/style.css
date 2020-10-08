@@ -203,9 +203,11 @@ hr {
 }
 
 /* product */
-.product {
+
+/* 當初商品少 為了撐開頁面高度 footer才不會往上跑 */
+/* .product {
     min-height: 80vh;
-}
+} */
 
 .product-list {
     background: #fff;

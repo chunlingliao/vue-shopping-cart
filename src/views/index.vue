@@ -55,9 +55,9 @@
                     <h5 class="section-heading text-left">全系列商品</h5>
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-xs-6 p-2" v-for="item in itemList" :key="item.id">
-                            <div class="product">
-															<router-link :to="{ path:'../product' , query: { itemName: item.itemName, price: item.price, count: item.count} }">
-																<img src="images/01.png" class="card-img-top" alt="...">
+                            <div>
+															<router-link :to="{ path:'../product' , query: { itemName: item.itemName, price: item.price, count: item.count, img:item.img, desc:item.desc  } }">
+																<img :src="`${item.img}`" class="card-img-top" alt="...">
 															</router-link>
                                 <div class="card-body">
                                     <div class="caption">
@@ -124,26 +124,87 @@ export default {
           id: '1',
           itemName: 'MB-01 奧本水洗式電動鼻毛刀',
           price:'489',
-          count: '1',
+					count: '1',
+					img: 'img/Lipstick/z001.jpg',
+					desc:'zzz'
         },
         {
           id: '2',
           itemName: 'MB-02',
           price:'29',
-          count: '1',
+					count: '1',
+					img: 'img/Lipstick/z002.jpg'
         },
         {
           id: '3',
           itemName: 'MB-03',
           price:'55',
-          count: '1',
+					count: '1',
+					img: 'img/Lipstick/z003.jpg'
 				},
 				{
           id: '4',
           itemName: 'MB-04',
           price:'99',
-          count: '1',
-        }
+					count: '1',
+					img: 'img/Lipstick/z004.png'
+				},
+				{
+          id: '5',
+          itemName: 'MB-04',
+          price:'99',
+					count: '1',
+					img: 'img/Lipstick/z005.jpg'
+				},
+				{
+          id: '6',
+          itemName: 'MB-04',
+          price:'99',
+					count: '1',
+					img: 'img/Lipstick/z006.jpg'
+				},
+				{
+          id: '7',
+          itemName: 'MB-04',
+          price:'99',
+					count: '1',
+					img: 'img/Lipstick/z007.jpg'
+				},
+				{
+          id: '8',
+          itemName: 'MB-04',
+          price:'99',
+					count: '1',
+					img: 'img/Lipstick/z008.jpg'
+				},
+				{
+          id: '9',
+          itemName: 'MB-04',
+          price:'99',
+					count: '1',
+					img: 'img/Lipstick/z009.jpg'
+				},
+				{
+          id: '10',
+          itemName: 'MB-04',
+          price:'99',
+					count: '1',
+					img: 'img/Lipstick/z010.jpg'
+				},
+				{
+          id: '11',
+          itemName: 'MB-04',
+          price:'99',
+					count: '1',
+					img: 'img/Lipstick/z011.jpg'
+				},
+				{
+          id: '12',
+          itemName: 'MB-04',
+          price:'99',
+					count: '1',
+					img: 'img/Lipstick/z012.jpg'
+				}
 			]
     }
   },

@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col-md-6 product-list mt-4">
             <div>
-              <img src="images/01.png" alt="" class="product-add-img">
+              <img :src="img" alt="" class="product-add-img">
             </div>
             <div>
               <img src="images/01.png" alt="" class="product-img mr-2 addProductBoder">
@@ -26,12 +26,12 @@
           <div class="col-md-6 product-list mt-4">
             <div>
               <h3 class="title">{{ itemName }}</h3>
-              <p class="promote mt-5 mb-5">
-                ▍ 全機精密防水，浴室使用也不怕水<br>
+              <p class="promote mt-5 mb-5">{{ desc }}
+                <!-- ▍ 全機精密防水，浴室使用也不怕水<br>
                 ▍ 依照鼻腔構造設計，立體安全圓形刀頭<br>
                 ▍ 360度刀頭沖洗設計，快速清潔，乾淨衛生<br>
                 ▍ 日本頂級高碳鋼刀刃，堅硬耐久使用<br>
-                ▍ 日本Mabuchi馬達，馬力效能一流<br>
+                ▍ 日本Mabuchi馬達，馬力效能一流<br> -->
               </p>
             </div>
             <span class="mr-1">幣別:</span>
@@ -100,6 +100,8 @@
         itemName: this.$route.query.itemName,
         price: this.$route.query.price,
         priceres: this.$route.query.price,
+        img: this.$route.query.img,
+        desc: this.$route.query.desc,
         selectChangeItems: {
           selected: '台幣',
           options: [{
