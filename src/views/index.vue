@@ -56,7 +56,8 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-xs-6 p-2" v-for="item in itemList" :key="item.id">
                             <div>
-															<router-link :to="{ path:'../product' , query: { itemName: item.itemName, price: item.price, count: item.count, img:item.img, desc:item.desc  } }">
+															<!-- <router-link :to="{ path:'../product' , query: { itemName: item.itemName, price: item.price, count: item.count, img:item.img, desc:item.desc  } }"> -->
+															<router-link :to="{ path:'../product' , query: {  item: item } }">
 																<img :src="`${item.img}`" class="card-img-top" alt="...">
 															</router-link>
                                 <div class="card-body">
@@ -122,88 +123,99 @@ export default {
       itemList:[
         {
           id: '1',
-          itemName: 'MB-01 奧本水洗式電動鼻毛刀',
-          price:'489',
+          itemName: 'YSL 聖羅蘭 奢華緞面漆光唇釉',
+          price:'1300',
 					count: '1',
 					img: 'img/Lipstick/z001.jpg',
-					desc:'zzz'
+					desc:'▍2018 網友評鑑美妝賞 唇釉 第1名 <br> ▍2018 綜合賞 綜合大賞 第1名 <br>▍2017 網友評鑑美妝賞 唇釉 第1名'
         },
         {
           id: '2',
-          itemName: 'MB-02',
-          price:'29',
+          itemName: 'YSL 聖羅蘭 情挑誘光水唇膏',
+          price:'1300',
 					count: '1',
-					img: 'img/Lipstick/z002.jpg'
+					img: 'img/Lipstick/z002.jpg',
+					desc: '▍2017 聖殿賞 聖殿賞 第2名 <br> ▍2016 網友評鑑美妝賞 唇膏 第2名 <br> ▍2015 網友評鑑美妝賞 唇膏 第2名 <br> ▍2014 網友評鑑美妝賞 唇膏 第1名 <br>▍2013 上半年新秀賞 唇膏 第1名 <br>▍2013 網友評鑑美妝賞 唇膏 第1名'
         },
         {
           id: '3',
           itemName: 'MB-03',
           price:'55',
 					count: '1',
-					img: 'img/Lipstick/z003.jpg'
+					img: 'img/Lipstick/z003.jpg',
+					desc: '▍2017 聖殿賞 聖殿賞 第2名 <br> ▍2016 網友評鑑美妝賞 唇膏 第2名 <br> ▍2015 網友評鑑美妝賞 唇膏 第2名 <br> ▍2014 網友評鑑美妝賞 唇膏 第1名 <br>▍2013 上半年新秀賞 唇膏 第1名'
 				},
 				{
           id: '4',
-          itemName: 'MB-04',
+          itemName: 'ROCK真我唇膏筆',
           price:'99',
 					count: '1',
-					img: 'img/Lipstick/z004.png'
+					img: 'img/Lipstick/z004.png',
+					desc:' ▍60款訂製色任意混搭混色，創造大於60的真我專屬色。<br> ▍專業唇刷筆桿外型設計，一筆勾勒完美上色。<br> ▍霧光感色澤、高延展質地，內含柔焦複合體及天然山茶花、維他命E等成分，能夠撫平唇紋不卡紋，擁有霧感唇色的同時仍具保濕功效。'
 				},
 				{
           id: '5',
-          itemName: 'MB-04',
-          price:'99',
+          itemName: '奢華美唇訂製唇膏 Rouge d’ Armani',
+          price:'1200',
 					count: '1',
-					img: 'img/Lipstick/z005.jpg'
+					img: 'img/Lipstick/z005.jpg',
+					desc:'粉嫩、好上手、顯色、好氣色、飽滿、細緻、金屬光 <br> ▍2016 網友評鑑美妝賞 唇膏 第1名'
 				},
 				{
           id: '6',
-          itemName: 'MB-04',
-          price:'99',
+          itemName: 'Dior 迪奧 癮誘粉漾潤唇膏',
+          price:'1050',
 					count: '1',
-					img: 'img/Lipstick/z006.jpg'
+					img: 'img/Lipstick/z006.jpg',
+					desc:'▍2019 網友評鑑美妝賞 唇部保養 第2名 <br> ▍2018 網友評鑑美妝賞 唇部保養 第3名 <br> ▍2017 網友評鑑美妝賞 唇部保養 第2名 <br> ▍2016 網友評鑑美妝賞 唇部保養 第1名'
 				},
 				{
           id: '7',
-          itemName: 'MB-04',
-          price:'99',
+          itemName: 'LOREAL PARiS 巴黎萊雅 奢華皮革訂製唇膏',
+          price:'470',
 					count: '1',
-					img: 'img/Lipstick/z007.jpg'
+					img: 'img/Lipstick/z007.jpg',
+					desc:'*精品皮革訂製唇膏 與奢華同行 <br> -重金訂製低調細緻皮革包裝 <br> -今年秋冬用雙唇演繹出 專屬的皮革時尚新態度 <br> *#小棕皮 玩轉絲絨柔霧唇X亮澤光感唇 打造時尚「皮氣感」<br> -注入滿滿專櫃等級的珍稀植物萃取精華油成分，及保濕鎖水因子 <br> -唇色顯色又飽和呈絲絨霧面感卻保濕不卡紋 <br> -雙唇閃耀低調卻不俗氣的質感亮澤光'
 				},
 				{
           id: '8',
-          itemName: 'MB-04',
-          price:'99',
+          itemName: 'YSL 聖羅蘭 情挑誘吻蜜唇露',
+					price:'1280',
 					count: '1',
-					img: 'img/Lipstick/z008.jpg'
+					img: 'img/Lipstick/z008.jpg',
+					desc: '顯色度佳、不易掉色、紅色系、裸色系、橘色系、紫色系、粉色系、桃紅色系、遮蓋唇色 <br> ▍2018 網友評鑑美妝賞 唇露 第2名 <br> ▍2018 上半年新秀賞 唇露 第1名'
 				},
 				{
           id: '9',
-          itemName: 'MB-04',
-          price:'99',
+          itemName: 'Dior 迪奧 癮誘超模漆光唇釉',
+          price:'1200',
 					count: '1',
-					img: 'img/Lipstick/z009.jpg'
+					img: 'img/Lipstick/z009.jpg',
+					desc:'▍2018 網友評鑑美妝賞 唇釉 第2名 <br> ▍2017 網友評鑑美妝賞 唇釉 第2名'
 				},
 				{
           id: '10',
-          itemName: 'MB-04',
-          price:'99',
+          itemName: 'Estee Lauder 雅詩蘭黛 絕對慾望精油唇膏',
+          price:'1150',
 					count: '1',
-					img: 'img/Lipstick/z010.jpg'
+					img: 'img/Lipstick/z010.jpg',
+					desc: '顯色度佳、不易掉色、紅色系、遮蓋唇色、好上手、顯白 <br> ▍2017 上半年新秀賞 唇膏 第1名'
 				},
 				{
           id: '11',
-          itemName: 'MB-04',
-          price:'99',
+          itemName: 'Whoo 皇后之吻潤色護唇膏',
+          price:'1080',
 					count: '1',
-					img: 'img/Lipstick/z011.jpg'
+					img: 'img/Lipstick/z011.jpg',
+					desc:'【 用途 】<br>添加高效漢本保養精華成分，能夠防止唇部水分蒸發，並升雙唇的柔軟度，重現水潤光采。使雙唇平滑，並修護龜裂脫皮的肌膚。'
 				},
 				{
           id: '12',
-          itemName: 'MB-04',
-          price:'99',
+          itemName: 'COCO水亮唇膏 ROUGE COCO SHINE',
+          price:'1150',
 					count: '1',
-					img: 'img/Lipstick/z012.jpg'
+					img: 'img/Lipstick/z012.jpg',
+					desc: '▍2012 網友評鑑美妝賞 唇膏 第1名 <br> ▍2011 網友評鑑美妝賞 唇膏 第3名'
 				}
 			]
     }

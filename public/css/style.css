@@ -1,4 +1,7 @@
 /* 共用 */
+/* body,html,#app{
+    height: 100%;
+} */
 a {
     color: #565656;
 }
@@ -206,8 +209,12 @@ hr {
 
 /* 當初商品少 為了撐開頁面高度 footer才不會往上跑 */
 /* .product {
-    min-height: 80vh;
+    min-height: 80vh; 
 } */
+
+.product-hight{
+    min-height: 750px;
+}
 
 .product-list {
     background: #fff;

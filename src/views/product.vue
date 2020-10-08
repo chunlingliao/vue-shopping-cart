@@ -10,7 +10,7 @@
         <li class="breadcrumb-item"><a href="#">全系列商品</a></li>
       </ol>
     </nav>
-    <div class="product">
+    <div class="product-hight">
       <div class="container">
         <div class="row">
           <div class="col-md-6 product-list mt-4">
@@ -26,7 +26,8 @@
           <div class="col-md-6 product-list mt-4">
             <div>
               <h3 class="title">{{ itemName }}</h3>
-              <p class="promote mt-5 mb-5">{{ desc }}
+              <p class="promote mt-5 mb-5" v-html="desc">
+                <!-- {{ desc }} -->
                 <!-- ▍ 全機精密防水，浴室使用也不怕水<br>
                 ▍ 依照鼻腔構造設計，立體安全圓形刀頭<br>
                 ▍ 360度刀頭沖洗設計，快速清潔，乾淨衛生<br>
@@ -96,12 +97,12 @@
     },
     data() {
       return {
-        count: this.$route.query.count,
-        itemName: this.$route.query.itemName,
-        price: this.$route.query.price,
-        priceres: this.$route.query.price,
-        img: this.$route.query.img,
-        desc: this.$route.query.desc,
+        count: this.$route.query.item.count,
+        itemName: this.$route.query.item.itemName,
+        price: this.$route.query.item.price,
+        priceres: this.$route.query.item.price,
+        img: this.$route.query.item.img,
+        desc: this.$route.query.item.desc,
         selectChangeItems: {
           selected: '台幣',
           options: [{
