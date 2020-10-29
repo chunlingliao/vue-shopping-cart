@@ -44,6 +44,10 @@ p {
     color: #fff;
     background: #ff674f;
 }
+.min-height{
+    background: #fff;
+    min-height: 80vh;
+}
 
 /* header */
 .bg-light {
@@ -64,6 +68,19 @@ p {
     font-size: 12px;
     font-weight: 600;
     margin-left: 5px;
+}
+
+/* 登入頁 */
+.login {
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+}
+.loginform{
+    background: #eaeaea;
+    padding: 40px;
 }
 
 /* 購物車下拉選單 */
