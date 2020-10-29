@@ -27,6 +27,12 @@
             </div>
           </li>
         </ul>
+        <div class="">
+          <a href="#" id="shopcart-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </a>
+        </div>
         <div class="dropdown">
           <a href="#" id="shopcart-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
