@@ -17,11 +17,11 @@
             <div>
               <img :src="img" alt="" class="product-add-img">
             </div>
-            <div>
+            <!-- <div>
               <img src="images/01.png" alt="" class="product-img mr-2 addProductBoder">
               <img src="images/01.png" alt="" class="product-img mr-2 addProductBoder">
               <img src="images/01.png" alt="" class="product-img mr-2 addProductBoder">
-            </div>
+            </div> -->
           </div>
           <div class="col-md-6 product-list mt-4">
             <div>
@@ -97,12 +97,12 @@
     },
     data() {
       return {
-        count: this.$route.query.item.count,
-        itemName: this.$route.query.item.itemName,
-        price: this.$route.query.item.price,
-        priceres: this.$route.query.item.price,
-        img: this.$route.query.item.img,
-        desc: this.$route.query.item.desc,
+        count: this.$route.query.count,
+        itemName: this.$route.query.itemName,
+        price: this.$route.query.price,
+        priceres: this.$route.query.price,
+        img: this.$route.query.img,
+        desc: this.$route.query.desc,
         selectChangeItems: {
           selected: '台幣',
           options: [{
@@ -154,7 +154,7 @@
         getShoppingCartListState: 'getShoppingCartListState'
       })
     },
-   
+
     methods: {
       // 初始
       handlePlus() {
@@ -211,7 +211,7 @@
       },
       // 加入購物車
       addItem() {
-        // console.log('~~~',this.getShoppingCartListState)
+        console.log('~~~',this.getShoppingCartListState)
         // 需要用拷貝值才吃得到
         let a = cloneDeep(this.getShoppingCartListState)
 
@@ -223,6 +223,7 @@
             a[i] = {
               itemName: this.getShoppingCartListState[i].itemName,
               price: this.getShoppingCartListState[i].price,
+              img: this.getShoppingCartListState[i].img,
               count: Number(this.getShoppingCartListState[i].count) + Number(this.count)
             }
             haveSameName = true
@@ -234,6 +235,7 @@
           a.push({
             itemName: this.itemName,
             price: this.price,
+            img: this.img,
             count: this.count
           })
         }

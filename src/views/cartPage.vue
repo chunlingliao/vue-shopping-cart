@@ -56,7 +56,7 @@
             <tr v-for="(item, index) in itemList" :key="item.id">
               <td>
                 <div>
-                  <img src="images/01.png" alt="" class="product-img">
+                  <img :src="`${item.img}`" alt="" class="product-img">
                 </div>
               </td>
               <td class="text-center align-middle"><div class="d-flex align-items-center">{{ item.itemName }}</div></td>

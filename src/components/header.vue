@@ -62,6 +62,7 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="shopcart-dropdown">
             <!-- 一項商品 -->
             <div class="card-list" v-for="item in itemList" :key="item.id">
+              <!-- {{itemList}} -->
               <div class="product-item">
                 <div class="thumb-img">
                   <img :src="`${item.img}`" class="w-100" alt="">
