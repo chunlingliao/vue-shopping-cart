@@ -68,39 +68,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-lg-3 col-md-4 col-xs-6 p-2">
-                            <div class="product">
-                                <img src="images/01.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <div class="caption">
-                                        <h6>商品名稱</h6>
-                                        <div class="originalPrice">NT200</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-lg-3 col-md-4 col-xs-6 p-2">
-                            <div class="product">
-                                <img src="images/01.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <div class="caption">
-                                        <h6>商品名稱</h6>
-                                        <div class="originalPrice">NT200</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-lg-3 col-md-4 col-xs-6 p-2">
-                            <div class="product">
-                                <img src="images/01.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <div class="caption">
-                                        <h6>商品名稱</h6>
-                                        <div class="originalPrice">NT200</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>

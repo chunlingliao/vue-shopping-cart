@@ -5,7 +5,7 @@
   <nav class="breadcrumb-wrap" aria-label="breadcrumb">
     <ol class="breadcrumb container">
         <li class="breadcrumb-item"><router-link :to="{ path:'../index'}">Home</router-link></li>
-        <li class="breadcrumb-item"><a href="#">全系列商品</a></li>
+        <li class="breadcrumb-item"><a href="#"><router-link :to="{ path:'../index'}">全系列商品</router-link></a></li>
     </ol>
   </nav>
   <div class="cart-page">
@@ -19,7 +19,7 @@
             <hr>
           </div>
           
-          <div id="homeSubmenu" class="list-row">
+          <div id="homeSubmenu" class="list-row collapse">
             <div class="float-left">商品小計</div>
             <div class="text-right">{{ listTotalAmount }}</div>
             <hr>

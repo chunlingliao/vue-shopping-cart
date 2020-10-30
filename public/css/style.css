@@ -52,11 +52,12 @@ p {
 }
 
 .l-btn {
-    line-height: 30px;
+    line-height: 25px;
     font-size: 16px;
     letter-spacing: 3px;
     color: #000000;
     border: 1px solid #000000;
+    cursor: pointer;
 }
 
 .l-btn:hover {
@@ -90,6 +91,22 @@ p {
     margin-left: 5px;
 }
 
+.buy-list {
+    width: 100px !important;
+    padding: 0 !important;
+}
+.buy-list a {
+    padding: 5px 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.buy-list a:last-child {
+    border-bottom: unset;
+}
+.dropdown-item.active, .dropdown-item:active {
+    background-color: unset;
+    color: unset;
+}
 /* 登入頁 */
 .usericon {
     margin-right: 6px;
@@ -108,10 +125,14 @@ p {
     padding: 40px;
 }
 
+.dropdown-user {
+    width: 200px !important;
+}
+
 /* 購物車下拉選單 */
 .dropdown-menu {
-    width: 300px !important;
-    padding: 10px 20px 20px;
+    width: 300px;
+    padding: 15px;
     font-size: 15px;
 }
 
@@ -173,17 +194,11 @@ p {
     position: relative;
 }
 
-.category-dropdown li:first-child:before {
-    left: 5%;
-    width: 90%;
-}
-
 .category-dropdown li:before {
     position: absolute;
     top: 0;
     content: '';
-    right: 5%;
-    width: 85%;
+    width: 100%;
     z-index: 1;
     border-bottom: 1px solid #e9e9e9;
 }
@@ -273,6 +288,7 @@ hr {
     padding: 10px;
     margin-top: 30px;
     border: none;
+    cursor: pointer;
 }
 
 .addInputGroup {
@@ -286,4 +302,25 @@ hr {
 .promote {
     font-size: 16px;
     color: #737373;
+}
+
+@media (max-width:576px) {
+    .loginform {
+        background: #ffffff;
+    }
+
+    .login {
+        position: relative;
+        top: unset;
+        left: unset;
+        transform: unset;
+        width: unset;
+    }
+
+    .min-height {
+        min-height: unset;
+    }
+    .buy-list-mb li {
+        padding: 10px 0;
+    }
 }

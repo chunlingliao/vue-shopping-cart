@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col-md-6 product-list mt-4">
             <div>
-              <img :src="img" alt="" class="product-add-img">
+              <img :src="img" alt="" class="w-100">
             </div>
             <div>
               <img src="images/01.png" alt="" class="product-img mr-2 addProductBoder">
@@ -42,10 +42,10 @@
               </option>
             </select>
             <!-- daisy -->
-            <select v-model="selected" class="form-control filterSelect d-inline-block" style="width:150px">
+            <!-- <select v-model="selected" class="form-control filterSelect d-inline-block" style="width:150px">
               <option value="" disabled>--請選擇幣別--</option>
               <option :value="item" v-for="(item,i) in selectData" :key="i">{{ item.text }}</option>
-            </select>
+            </select> -->
             <div>
               {{ moneyType }}.{{ priceres }}
             </div>

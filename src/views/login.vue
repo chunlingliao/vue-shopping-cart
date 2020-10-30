@@ -36,12 +36,12 @@
         <div class="loginform">
           <div class="form-group">
             <label for="exampleInputUser">帳號</label>
-            <input type="text" v-model="user.username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+            <input type="text" v-model="user.username" @keyup.enter="login()" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">密碼</label>
-            <input v-model="user.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input v-model="user.password" @keyup.enter="login()" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
           </div>
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
