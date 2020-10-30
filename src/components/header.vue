@@ -27,11 +27,23 @@
             </div>
           </li>
         </ul>
-        <div class="">
-          <a href="#" id="shopcart-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+        <div class="dropdown">
+          <a href="#" id="user-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            <i class="fas fa-user"></i>
+            <span class="usericon" v-if="loginStatus==='true'">歡迎{{ username }}</span>
+            <i class="fas fa-user usericon"></i>
           </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user-dropdown">
+            <!-- 登入登出 -->
+            <router-link :to="{ path:'../login' }" v-if="loginStatus!=='true'">
+              <div class="btn btn-block btn-cart">
+                  登入
+              </div>
+            </router-link>
+              <div v-else class="btn btn-block btn-cart" @click="loginout()">
+                  登出
+              </div>
+          </div>
         </div>
         <div class="dropdown">
           <a href="#" id="shopcart-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -79,7 +91,9 @@ export default {
       count:'0',
       listTotalAmount:'0', // 商品小計
       totalAmount:'0', // 應付金額
-      cartCount:'0' // 購物車商品數量
+      cartCount:'0', // 購物車商品數量
+      username: this.$route.query.username,
+      loginStatus: localStorage.getItem('login')
     }
   },
   watch: {
@@ -116,7 +130,15 @@ export default {
         this.totalAmount = total + this.shipping // 應付金額 = 商品小計 ＋ 運費
         this.cartCount = cartTotal // 購物車商品數量
         console.log('>>>>>>>>>>>>>>>',this.cartCount)
-      }
+      },
+    loginout() {
+      localStorage.clear();
+      location.reload()
+      this.$toastr.success(`成功登出`)
+      this.$router.push({
+        path: '/index',
+      })
+    }
   },
   //BEGIN--生命週期
   beforeCreate: function() {
