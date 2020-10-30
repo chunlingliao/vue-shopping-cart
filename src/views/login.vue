@@ -47,7 +47,7 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">記住我</label>
           </div>
-          <button @click="login()" class="btn btn-primary">登入</button>
+          <button @click="login()" class="btn btn-block btn-primary">登入</button>
         <!-- </form> -->
         </div>
       </div>

@@ -30,19 +30,26 @@
         <div class="dropdown">
           <a href="#" id="user-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            <span class="usericon" v-if="loginStatus==='true'">歡迎{{ username }}</span>
             <i class="fas fa-user usericon"></i>
+            <span class="usericon mr-3" v-if="loginStatus==='true'">{{ username }}</span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user-dropdown">
             <!-- 登入登出 -->
             <router-link :to="{ path:'../login' }" v-if="loginStatus!=='true'">
-              <div class="btn btn-block btn-cart">
-                  登入
+              <div class="btn btn-block l-btn mb-2">
+                登入
               </div>
             </router-link>
-              <div v-else class="btn btn-block btn-cart" @click="loginout()">
-                  登出
+            <div v-else>
+              <router-link :to="{ path:'../cartPage' , query: { count: count } }">
+                <div class="btn btn-block l-btn mb-2">
+                  訂單明細
+                </div>
+              </router-link>
+              <div class="btn btn-block btn-primary l-btn" @click="loginout()">
+                會員登出
               </div>
+            </div>
           </div>
         </div>
         <div class="dropdown">
@@ -68,13 +75,14 @@
                 </div>
               </div>
             </div>
-            <div class="total text-right mb-2"><span>總計: </span><span class="danger-color">{{ listTotalAmount }}</span></div>
-            
-              <router-link :to="{ path:'../cartPage' , query: { count: count } }">
-              <div class="btn btn-block btn-cart">
-                  立即結帳
+            <div class="total text-right mb-2"><span>總計: </span><span class="danger-color">{{ listTotalAmount }}</span>
+            </div>
+
+            <router-link :to="{ path:'../cartPage' , query: { count: count } }">
+              <div class="btn btn-block l-btn">
+                立即結帳
               </div>
-              </router-link>
+            </router-link>
           </div>
         </div>
       </div>
@@ -83,94 +91,96 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-export default {
-  data() {
-    return {
-      itemList:[],
-      count:'0',
-      listTotalAmount:'0', // 商品小計
-      totalAmount:'0', // 應付金額
-      cartCount:'0', // 購物車商品數量
-      username: this.$route.query.username,
-      loginStatus: localStorage.getItem('login')
-    }
-  },
-  watch: {
-    //監聽值
-    // 商品明細的數量變更
-    getShoppingCartListState: {
-      handler (val) {
-        console.log('>> watch', val)
-        this.itemList = val
-        this.totalprice()
-      },
-      deep: true
-    }
-  },
-  computed: {
-    ...mapGetters({
-      getShoppingCartListState: 'getShoppingCartListState'
-    })
-  },
-  methods: {
-    // 初始
-    // 商品小計 加總金額
-    totalprice() {
-      this.itemList = this.getShoppingCartListState
-      let total = 0 // 先宣告等於0
-      let cartTotal = 0
+  import {
+    mapGetters
+  } from 'vuex'
+  export default {
+    data() {
+      return {
+        itemList: [],
+        count: '0',
+        listTotalAmount: '0', // 商品小計
+        totalAmount: '0', // 應付金額
+        cartCount: '0', // 購物車商品數量
+        username: this.$route.query.username,
+        loginStatus: localStorage.getItem('login')
+      }
+    },
+    watch: {
+      //監聽值
+      // 商品明細的數量變更
+      getShoppingCartListState: {
+        handler(val) {
+          console.log('>> watch', val)
+          this.itemList = val
+          this.totalprice()
+        },
+        deep: true
+      }
+    },
+    computed: {
+      ...mapGetters({
+        getShoppingCartListState: 'getShoppingCartListState'
+      })
+    },
+    methods: {
+      // 初始
+      // 商品小計 加總金額
+      totalprice() {
+        this.itemList = this.getShoppingCartListState
+        let total = 0 // 先宣告等於0
+        let cartTotal = 0
         for (let i in this.itemList) {
-          console.log(i, this.itemList[i].price,this.itemList[i].count)
+          console.log(i, this.itemList[i].price, this.itemList[i].count)
           total += this.itemList[i].price * this.itemList[i].count
           cartTotal += parseInt(this.itemList[i].count)
         }
-        console.log(',,,',cartTotal)
+        console.log(',,,', cartTotal)
         this.listTotalAmount = total
         this.totalAmount = total + this.shipping // 應付金額 = 商品小計 ＋ 運費
         this.cartCount = cartTotal // 購物車商品數量
-        console.log('>>>>>>>>>>>>>>>',this.cartCount)
+        console.log('>>>>>>>>>>>>>>>', this.cartCount)
       },
-    loginout() {
-      localStorage.clear();
-      location.reload()
-      this.$toastr.success(`成功登出`)
-      this.$router.push({
-        path: '/index',
-      })
+      loginout() {
+        localStorage.clear();
+        this.username = ''
+        this.$toastr.success(`成功登出`)
+        this.$router.push({
+          path: '/index',
+        })
+      }
+    },
+    //BEGIN--生命週期
+    beforeCreate: function () {
+      //實體初始化
+    },
+    created: function () {
+      //實體建立完成。資料 $data 已可取得，但 $el 屬性還未被建立。
+      this.src = this.$options.__file;
+    },
+    beforeMount: function () {
+      //執行元素掛載之前。
+    },
+    mounted: function () {
+      //元素已掛載， $el 被建立。
+      // console.log(window.customElements)
+      this.totalprice()
+      // console.log('gettttState:', this.gettttState)
+    },
+    beforeUpdate: function () {
+      //當資料變化時被呼叫，還不會描繪 View。
+    },
+    updated: function () {
+      //當資料變化時被呼叫，還不會描繪 View。
+    },
+    beforeDestroy: function () {
+      //實體還可使用。
+    },
+    destroyed: function () {
+      //實體銷毀。
     }
-  },
-  //BEGIN--生命週期
-  beforeCreate: function() {
-    //實體初始化
-  },
-  created: function() {
-    //實體建立完成。資料 $data 已可取得，但 $el 屬性還未被建立。
-    this.src = this.$options.__file ;
-  },
-  beforeMount: function() {
-    //執行元素掛載之前。
-  },
-  mounted: function() {
-    //元素已掛載， $el 被建立。
-    // console.log(window.customElements)
-    this.totalprice()
-    // console.log('gettttState:', this.gettttState)
-  },
-  beforeUpdate: function() {
-    //當資料變化時被呼叫，還不會描繪 View。
-  },
-  updated: function() {
-    //當資料變化時被呼叫，還不會描繪 View。
-  },
-  beforeDestroy: function() {
-    //實體還可使用。
-  },
-  destroyed: function() {
-    //實體銷毀。
+    //END--生命週期
   }
-  //END--生命週期
-}
 </script>
 
 <style>

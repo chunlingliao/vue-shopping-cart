@@ -25,26 +25,46 @@ p {
 
 .major-bg-color {
     background-color: #ff6854;
+    color: #ffffff;
+}
+
+.major-bg-color:hover {
+    background-color: #ff6854;
+}
+
+.major-bg-color a {
+    color: #ffffff;
+}
+
+.btn-primary {
+    background-color: #93A1AA;
+    border-color: #93A1AA !important;
+    color: #ffffff !important;
+}
+
+.btn-primary:hover {
+    background-color: #b1b9bd !important;
+    border-color: #b1b9bd !important;
 }
 
 .danger-color {
     color: #f30d2a;
 }
 
-.btn-cart {
+.l-btn {
     line-height: 30px;
     font-size: 16px;
     letter-spacing: 3px;
     color: #000000;
-    background: #fff;
     border: 1px solid #000000;
 }
 
-.btn-cart:hover {
+.l-btn:hover {
     color: #fff;
     background: #ff674f;
 }
-.min-height{
+
+.min-height {
     background: #fff;
     min-height: 80vh;
 }
@@ -63,7 +83,7 @@ p {
     text-align: center;
     color: #FFF;
     /* border-radius: 50%; 就會變圓形 */
-    border-radius: 50%; 
+    border-radius: 50%;
     float: right;
     font-size: 12px;
     font-weight: 600;
@@ -82,7 +102,8 @@ p {
     transform: translateX(-50%) translateY(-50%);
     position: absolute;
 }
-.loginform{
+
+.loginform {
     background: #eaeaea;
     padding: 40px;
 }
@@ -233,7 +254,7 @@ hr {
     min-height: 80vh; 
 } */
 
-.product-hight{
+.product-hight {
     min-height: 750px;
 }
 
