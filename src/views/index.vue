@@ -56,8 +56,8 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-xs-6 p-2" v-for="item in itemList" :key="item.id">
                             <div>
-															<!-- <router-link :to="{ path:'../product' , query: { itemName: item.itemName, price: item.price, count: item.count, img:item.img, desc:item.desc  } }"> -->
-															<router-link :to="{ path:'../product' , query: {  item: item } }">
+															<router-link :to="{ path:'../product' , query: { itemName: item.itemName, price: item.price, count: item.count, img:item.img, desc:item.desc  } }">
+															<!-- <router-link :to="{ path:'../product' , query: {  item: item } }"> -->
 																<img :src="`${item.img}`" class="card-img-top" alt="...">
 															</router-link>
                                 <div class="card-body">
