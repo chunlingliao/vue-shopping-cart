@@ -71,6 +71,10 @@ p {
 }
 
 /* 登入頁 */
+.usericon {
+    margin-right: 6px;
+}
+
 .login {
     width: 400px;
     top: 50%;

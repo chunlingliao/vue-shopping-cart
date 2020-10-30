@@ -95,9 +95,11 @@ export default {
           // success
           console.log(this.user.username,this.user.password)
           this.$toastr.success(`${this.user.username} 登入成功`)
+          localStorage.setItem('login','true')
           // 登入成功跳轉內頁
           this.$router.push({
-            path: '/index'
+            path: '/index',
+            query: { username: this.user.username }
           })
         }
       }
