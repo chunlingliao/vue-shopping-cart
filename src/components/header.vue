@@ -64,7 +64,7 @@
             <div class="card-list" v-for="item in itemList" :key="item.id">
               <div class="product-item">
                 <div class="thumb-img">
-                  <img class="w-100" src="images/01.png" alt="">
+                  <img :src="`${item.img}`" class="w-100" alt="">
                 </div>
                 <div class="product-name">
                   <p class="title">{{ item.itemName }}</p>
@@ -128,6 +128,7 @@
       // 商品小計 加總金額
       totalprice() {
         this.itemList = this.getShoppingCartListState
+        // console.log('img',this.itemList)
         let total = 0 // 先宣告等於0
         let cartTotal = 0
         for (let i in this.itemList) {
@@ -143,6 +144,9 @@
       },
       loginout() {
         localStorage.clear();
+        this.loginStatus = 'false'
+        this.$store.dispatch("setShoppingCartList", [])
+        this.cartCount = 0
         this.username = ''
         this.$toastr.success(`成功登出`)
         this.$router.push({
