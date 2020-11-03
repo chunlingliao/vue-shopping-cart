@@ -84,6 +84,47 @@
             </tr>
           </tbody>
         </table>
+
+      <!-- 手機版 -->
+        <div class="buy-list-mb">
+          <div>商品明細</div>
+          <div class="normal-line-items col-xs-12" v-for="(item, index) in itemList" :key="item.id">
+            <div class="line-item">          
+              <div class="image-and-content float-left">
+                <div class="float-left">
+                  <img :src="`${item.img}`" alt="" class="product-img">
+                </div>
+                <div class="line-item-content float-left">
+                  <div class="title">
+                    {{ item.itemName }}
+                  </div>
+                  <span data-money-format="true">{{ item.price }}</span>
+                </div>
+                <div class="delete-button float-right" @click="handledelete(index)"><i class="fas fa-trash-alt"></i></div>
+              </div>
+              <div>
+                <div class="input-group float-left buy-count">
+                  <div class="input-group-prepend">
+                    <button style="min-width: 2.5rem"
+                      class="btn btn-decrement btn-outline-secondary"
+                      type="button" @click="handleSub(index)"><strong>-</strong>
+                    </button>
+                  </div>
+                  <input type="text" inputmode="decimal" style="text-align: center"
+                      class="form-control" v-model="item.count">
+                  <div class="input-group-append">
+                    <button style="min-width: 2.5rem"
+                      class="btn btn-increment btn-outline-secondary"
+                      type="button" @click="handlePlus(index)"><strong>+</strong>
+                    </button>
+                  </div>
+                </div>
+                <div class="float-right">NT.{{ item.price * item.count }}</div>
+              </div>
+              </div>
+            </div>
+        </div>
+        <!-- 手機版結束 -->
         </div>
       </div>
     </div>

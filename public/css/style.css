@@ -303,6 +303,11 @@ hr {
     font-size: 16px;
     color: #737373;
 }
+/* 電腦版時 隱藏手機版的商品明細 */
+
+.buy-list-mb{
+    display: none;
+}
 
 @media (max-width:576px) {
     .loginform {
@@ -322,5 +327,22 @@ hr {
     }
     .buy-list-mb li {
         padding: 10px 0;
+    }
+    .buy-list-mb{
+        display: block;
+        background: #ffffff;
+        padding:15px;
+    }
+    .buy-count{
+        width:150px;
+    }
+    .line-item-content {
+        margin-right: 26px;
+    }
+    .table{
+        display: none;
+    }
+    .image-and-content{
+        display: flex;
     }
 }
