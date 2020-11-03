@@ -2,14 +2,16 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       <div class="mobile-nav">
-        <button class="navbar-toggler float-left" type="button" data-toggle="collapse"
+        <button class="navbar-toggler float-left mr-2" type="button" data-toggle="collapse"
           data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
           aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="nav-logo float-left ml-3 ml-md-0"><a class="navbar-brand" href="#">LOGO</a></div>
+        <router-link :to="{ path:'../index' }">
+          <div class="nav-logo float-left ml-3 ml-md-0"><a class="navbar-brand" href="#">LOGO</a></div>
+        </router-link>
       </div>
-      <div class="collapse navbar-collapse order-2 order-md-1" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse order-2 order-lg-1" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item active">
             <a class="nav-link" href="#">關於我們 <span class="sr-only">(current)</span></a>
@@ -17,7 +19,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">最新動態</a>
           </li>
-          <li class="nav-item dropdown d-none d-md-block">
+          <li class="nav-item dropdown d-none d-lg-block">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               購買商品
@@ -29,7 +31,7 @@
             </div>
           </li>
           <!-- 手機版"購買商品" -->
-          <li class="nav-item d-block d-md-none">
+          <li class="nav-item d-block d-lg-none">
             <a href="#buy" data-toggle="collapse" aria-expanded="false"
               class="dropdown-toggle nav-link">購買商品</a>
             <ul class="collapse list-unstyled category-dropdown buy-list-mb" id="buy">
@@ -40,7 +42,7 @@
           </li>
         </ul>
       </div>
-      <div class="d-inline-flex order-1 order-md-2">
+      <div class="d-inline-flex order-1 order-lg-2">
         <div class="dropdown">
           <a href="#" id="user-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
