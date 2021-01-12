@@ -46,7 +46,21 @@
                 </tr>
               </thead>
 
-              <tbody class="product-contect">
+              <tbody v-if="itemList.length <= 0" class="product-contect">
+                <tr>
+                  <td class="text-center" colspan="6">
+                    <div><i class="fas fa-shopping-cart"></i></div>
+                    <div>快點去購物唷～</div>
+                    <button class="addBtn major-bg-color ml-3">
+                      <router-link :to="{ path:'/' }">
+                        購物去
+                      </router-link>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+
+              <tbody v-else class="product-contect">
                 <tr v-for="(item, index) in itemList" :key="item.id">
                   <td>
                     <div>
@@ -80,7 +94,18 @@
             </table>
 
             <!-- 手機版 -->
-            <div class="product-contect-mb">
+            <div v-if="itemList.length <= 0" class="product-contect-mb">
+              <div class="text-center">
+                <div><i class="fas fa-shopping-cart"></i></div>
+                <div>快點去購物唷～</div>
+                <button class="addBtn major-bg-color ml-3">
+                  <router-link :to="{ path:'/' }">
+                    購物去
+                  </router-link>
+                </button>
+              </div>
+            </div>
+            <div v-else class="product-contect-mb">
               <div>商品明細</div>
               <div class="normal-line-items col-xs-12">
                 <div class="line-item" v-for="(item, index) in itemList" :key="item.id">

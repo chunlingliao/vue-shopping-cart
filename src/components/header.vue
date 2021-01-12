@@ -7,7 +7,7 @@
           aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <router-link :to="{ path:'../index' }">
+        <router-link :to="{ path:'/' }">
           <div class="nav-logo float-left ml-3 ml-md-0"><a class="navbar-brand" href="#">LOGO</a></div>
         </router-link>
       </div>
@@ -166,7 +166,7 @@
         this.username = ''
         this.$toastr.success(`成功登出`)
         this.$router.push({
-          path: '/index',
+          path: '/',
         })
       }
     },

@@ -4,7 +4,7 @@
         <!-- 麵包屑 -->
         <nav class="breadcrumb-wrap" aria-label="breadcrumb">
             <ol class="breadcrumb container">
-                <li class="breadcrumb-item"><router-link :to="{ path:'../index'}">Home</router-link></li>
+                <li class="breadcrumb-item"><router-link :to="{ path:'/' }">Home</router-link></li>
                 <li class="breadcrumb-item"><a href="#">全系列商品</a></li>
             </ol>
         </nav>
@@ -71,6 +71,7 @@
                     </div>
                 </div>
             </div>
+            <a href="#" class="toTop" title="GoTop" style="display: inline;"><span></span></a>
         </div>
 			<footerTop />
     </div>
@@ -79,6 +80,7 @@
 <script>
 import headerTop from '../components/header'
 import footerTop from '../components/footer'
+import $ from 'jquery'
 export default {
   components: {
 		headerTop,
@@ -210,6 +212,20 @@ export default {
   mounted: function() {
     //元素已掛載， $el 被建立。
     // console.log(window.customElements)
+    //gotop
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+          $('.toTop').fadeIn()
+        } else {
+          $('.toTop').fadeOut()
+        }
+      })
+      $('.toTop').click(function () {
+        $('html, body').animate({
+          scrollTop: 0
+        }, 800)
+        return false
+      })
   },
   beforeUpdate: function() {
     //當資料變化時被呼叫，還不會描繪 View。

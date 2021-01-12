@@ -5,7 +5,7 @@
     <nav class="breadcrumb-wrap" aria-label="breadcrumb">
       <ol class="breadcrumb container">
         <li class="breadcrumb-item">
-          <router-link :to="{ path:'../index'}">Home</router-link>
+          <router-link :to="{ path:'/'}">Home</router-link>
         </li>
         <li class="breadcrumb-item"><a href="#">全系列商品</a></li>
       </ol>
@@ -37,7 +37,7 @@
             </div>
             <span class="mr-1">幣別:</span>
             <select v-model="selectChangeItems.selected" class="form-control filterSelect d-inline-block mr-1" style="width:150px">
-              <option v-for="option in selectChangeItems.options">
+              <option v-for="(option, i) in selectChangeItems.options" :key="i">
                 {{ option.text }}
               </option>
             </select>
@@ -89,6 +89,7 @@
   import headerTop from '../components/header'
   import footerTop from '../components/footer'
   import cloneDeep from 'lodash/cloneDeep'
+  import $ from 'jquery'
 
   export default {
     components: {
@@ -244,6 +245,7 @@
         this.$store.dispatch("setShoppingCartList", a)
 
       }
+      
     },
     //BEGIN--生命週期
     beforeCreate: function () {
@@ -259,6 +261,20 @@
     mounted: function () {
       //元素已掛載， $el 被建立。
       console.log(window.customElements)
+      //gotop
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+          $('.toTop').fadeIn()
+        } else {
+          $('.toTop').fadeOut()
+        }
+      })
+      $('.toTop').click(function () {
+        $('html, body').animate({
+          scrollTop: 0
+        }, 800)
+        return false
+      })
     },
     beforeUpdate: function () {
       //當資料變化時被呼叫，還不會描繪 View。
